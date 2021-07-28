@@ -71,7 +71,7 @@ def get_input(name):
         if validate_data(input_data):
             print(f"Valid {name} captured\n")
             break
-    print((input_data).title())
+    print(f"The value is {(input_data).title()}\n")
 
     return input_data.title()
 
@@ -92,4 +92,23 @@ def validate_data(value):
     return True
 
 
-get_input("first name")
+def add_candidate():
+    """
+    Run all program functions to add a candidate to the
+    Redeployment Process and save the data to the redeployment pool
+    worksheet
+    """
+    print("Please proceed to add a new employee.\n")
+    emp_number = get_employee_number()
+    emp_name = get_input("first name")
+    emp_surname = get_input("surname")
+    emp_department = get_input("department")
+    emp_position = get_input("position")
+    employee = [emp_number, emp_name, emp_surname, "emp_age",
+                "emp_gender", emp_department, emp_position, "emp_salary",
+                "emp_years", "emp_months", "emp_date", " ", "Active"]
+    print(employee)
+
+
+print("Welcome to the capture screen for the Redeployment Process.")
+add_candidate()
