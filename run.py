@@ -1,7 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import inquirer
-import datetime
+from datetime import datetime
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -164,8 +164,8 @@ def get_date():
     while True:
         print("Please enter the date of entry / start date")
         print("of the redeployment process for the employee.")
-        print("Please enter in the format YYYY/MM/DD")
-        print("Example: 2021/07/01 \n")
+        print("Please enter in the format DD/MM/YYYY")
+        print("Example: 01/07/2021 \n")
 
         date = input("Enter the start date here:\n")
 
@@ -182,17 +182,28 @@ def validate_date(my_str_date):
     if it is in the incorrect format
     """
     try:
-        if datetime.datetime.strptime(my_str_date, "%Y/%m/%d"):
+        if datetime.strptime(my_str_date, "%d/%m/%Y"):
             return my_str_date
         else:
             raise ValueError(f"{my_str_date}")
     except ValueError as e:
         print(f"Incorrect data format,"
-              f" should be YYYY/MM/DD, you entered {e} ,"
+              f" should be DD/MM/YYYY, you entered {e} ,"
               " please try again.\n")
         return False
 
     return True
+
+
+def update_sheet(data, worksheet):
+    """
+    Receives a list of values to be inserted into a worksheet
+    Update the relevant worksheet with the data provided
+    """
+    print(f"Updating {worksheet} worksheet...\n")
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
+    print(f"{worksheet} worksheet updated successfully\n")
 
 
 def add_candidate():
@@ -219,10 +230,12 @@ def add_candidate():
     emp_months = get_number("months of service", "months of service",
                             "1 to 11", month_range)
     emp_date = get_date()
-    employee = [emp_number, emp_name, emp_surname, emp_age,
-                emp_gender, emp_department, emp_position, emp_salary,
-                emp_years, emp_months, emp_date, " ", "Active"]
-    print(employee)
+    employee = [int(emp_number), emp_name, emp_surname, int(emp_age),
+                emp_gender, emp_department, emp_position, int(emp_salary),
+                int(emp_years), int(emp_months), 
+                (emp_date), " ", "Active"]
+
+    update_sheet(employee, "redeployment_pool")
 
 
 print("Welcome to the capture screen for the Redeployment Process.")
