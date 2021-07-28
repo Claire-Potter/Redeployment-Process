@@ -55,5 +55,41 @@ def validate_number(value):
     return True
 
 
-emp_number = get_employee_number()
-print(emp_number)
+def get_input(name):
+    """
+    Get the data input from the user.
+    Run a while loop for user to input data,
+    which must not contain numbers.
+    The loop will repeatedly request data, until it is valid.
+    """
+    while True:
+        print(f"Please enter the {name} of the employee.")
+        print("You cannot enter a number.")
+
+        input_data = input(f"Enter the {name} here:\n")
+
+        if validate_data(input_data):
+            print(f"Valid {name} captured\n")
+            break
+    print((input_data).title())
+
+    return input_data.title()
+
+
+def validate_data(value):
+    """
+    Inside the try, checks of the string is numeric,
+    Raises ValueError if strings is numeric.
+    """
+    try:
+        if value.isnumeric() is True:
+            raise ValueError(f"{value}")
+    except ValueError as e:
+        print(f"Numbers are not accepted, you entered {e},"
+              " please try again.\n")
+        return False
+
+    return True
+
+
+get_input("first name")
