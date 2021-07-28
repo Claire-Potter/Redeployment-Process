@@ -92,6 +92,47 @@ def validate_data(value):
     return True
 
 
+def get_number(title, number, range, given_range):
+    """
+    Get the input data of the employee from the user.
+    Run a while loop for user to input data,
+    which must be within the given range.
+    The loop will repeatedly request data, until it is valid.
+    """
+    while True:
+        print(f"Please enter the {title} of the employee.")
+        print(f"The {title} should be between the range {range}")
+
+        number = input(f"Enter the {title} here:\n")
+
+        if validate_range(number, range, given_range):
+            print(f"Data {title} captured\n")
+            break
+
+    return number
+
+
+def validate_range(number, range, given_range):
+    """
+    Inside the try, converts string value into integer.
+    Raises ValueError if strings cannot be converted into int,
+    or if value is not between the given range
+    """
+    try:
+        given_range
+        number = int(number)
+        if number not in given_range:
+            raise ValueError(
+                f"{number}"
+            )
+    except ValueError as e:
+        print(f"Only a value between {range} is accepted, you entered {e},"
+              " please try again.\n")
+        return False
+
+    return True
+
+
 def add_candidate():
     """
     Run all program functions to add a candidate to the
@@ -99,14 +140,24 @@ def add_candidate():
     worksheet
     """
     print("Please proceed to add a new employee.\n")
+    age_range = range(18, 76, 1)
+    salary_range = range(100, 100001, 1)
+    year_range = range(1, 51, 1)
+    month_range = range(1, 11, 1)
     emp_number = get_employee_number()
     emp_name = get_input("first name")
     emp_surname = get_input("surname")
+    emp_age = get_number("age", "age", "18 to 75", age_range)
     emp_department = get_input("department")
     emp_position = get_input("position")
-    employee = [emp_number, emp_name, emp_surname, "emp_age",
-                "emp_gender", emp_department, emp_position, "emp_salary",
-                "emp_years", "emp_months", "emp_date", " ", "Active"]
+    emp_salary = get_number("salary", "salary", "100 to 100 000", salary_range)
+    emp_years = get_number("years of service", "years of service",
+                           "1 to 50", year_range)
+    emp_months = get_number("months of service", "months of service",
+                            "1 to 11", month_range)
+    employee = [emp_number, emp_name, emp_surname, emp_age,
+                'emp_gender', emp_department, emp_position, emp_salary,
+                emp_years, emp_months, 'emp_date', " ", "Active"]
     print(employee)
 
 
