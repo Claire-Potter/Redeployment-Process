@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import inquirer
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -133,6 +134,25 @@ def validate_range(number, range, given_range):
     return True
 
 
+def get_gender():
+    """
+    Get the gender of the employee from the user.
+    Run a while loop for user to select data,
+    which must be one of the given values.
+    The loop will repeatedly request data, until it is valid.
+    """
+    while True:
+        gender = [inquirer.List("gender",
+                                message="Please select the "
+                                "employee's gender :",
+                                choices=["male", "female", "unknown", ],), ]
+        answers = inquirer.prompt(gender)
+        print("Valid gender selected \n")
+        break
+
+    return (answers["gender"])
+
+
 def add_candidate():
     """
     Run all program functions to add a candidate to the
@@ -148,6 +168,7 @@ def add_candidate():
     emp_name = get_input("first name")
     emp_surname = get_input("surname")
     emp_age = get_number("age", "age", "18 to 75", age_range)
+    emp_gender = get_gender()
     emp_department = get_input("department")
     emp_position = get_input("position")
     emp_salary = get_number("salary", "salary", "100 to 100 000", salary_range)
@@ -156,7 +177,7 @@ def add_candidate():
     emp_months = get_number("months of service", "months of service",
                             "1 to 11", month_range)
     employee = [emp_number, emp_name, emp_surname, emp_age,
-                'emp_gender', emp_department, emp_position, emp_salary,
+                emp_gender, emp_department, emp_position, emp_salary,
                 emp_years, emp_months, 'emp_date', " ", "Active"]
     print(employee)
 
