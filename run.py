@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import inquirer
+import datetime
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -72,7 +73,6 @@ def get_input(name):
         if validate_data(input_data):
             print(f"Valid {name} captured\n")
             break
-    print(f"The value is {(input_data).title()}\n")
 
     return input_data.title()
 
@@ -153,6 +153,48 @@ def get_gender():
     return (answers["gender"])
 
 
+def get_date():
+    """
+    Get the entry date of the employee into the
+    redeployment process from the user.
+    Run a while loop for user to input data,
+    which must be a string of letters.
+    The loop will repeatedly request data, until it is valid.
+    """
+    while True:
+        print("Please enter the date of entry / start date")
+        print("of the redeployment process for the employee.")
+        print("Please enter in the format YYYY/MM/DD")
+        print("Example: 2021/07/01 \n")
+
+        date = input("Enter the start date here:\n")
+
+        if validate_date(date):
+            print("Date captured\n")
+            break
+
+    return date
+
+
+def validate_date(my_str_date):
+    """
+    Raises ValueError if strings cannot be converted into a date and
+    if it is in the incorrect format
+    """
+    try:
+        if datetime.datetime.strptime(my_str_date, "%Y/%m/%d"):
+            return my_str_date
+        else:
+            raise ValueError(f"{my_str_date}")
+    except ValueError as e:
+        print(f"Incorrect data format,"
+              f" should be YYYY/MM/DD, you entered {e} ,"
+              " please try again.\n")
+        return False
+
+    return True
+
+
 def add_candidate():
     """
     Run all program functions to add a candidate to the
@@ -176,9 +218,10 @@ def add_candidate():
                            "1 to 50", year_range)
     emp_months = get_number("months of service", "months of service",
                             "1 to 11", month_range)
+    emp_date = get_date()
     employee = [emp_number, emp_name, emp_surname, emp_age,
                 emp_gender, emp_department, emp_position, emp_salary,
-                emp_years, emp_months, 'emp_date', " ", "Active"]
+                emp_years, emp_months, emp_date, " ", "Active"]
     print(employee)
 
 
