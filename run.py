@@ -183,7 +183,7 @@ def validate_date(my_str_date):
     """
     try:
         if datetime.strptime(my_str_date, "%d/%m/%Y"):
-            return my_str_date
+            return datetime.strptime(my_str_date, "%d/%m/%Y")
         else:
             raise ValueError(f"{my_str_date}")
     except ValueError as e:
@@ -232,7 +232,7 @@ def add_candidate():
     emp_date = get_date()
     employee = [int(emp_number), emp_name, emp_surname, int(emp_age),
                 emp_gender, emp_department, emp_position, int(emp_salary),
-                int(emp_years), int(emp_months), 
+                int(emp_years), int(emp_months),
                 (emp_date), " ", "Active"]
 
     update_sheet(employee, "redeployment_pool")
