@@ -285,7 +285,6 @@ def select_field():
     Utilise the headers as the identifier to select
     the column of data to update
     """
-    select_employee()
     headers = retrieve_headers()
     options_list = []
     options_list.extend([headers[1], headers[2], headers[3],
@@ -304,14 +303,71 @@ def select_field():
     return (answers["update_option"])
 
 
+def update_another_field():
+    """
+    Checks with the user if they would like to update
+    another field. User answers Yes or No
+    """
+    while True:
+        yes_or_no = [inquirer.List("choice",
+                                   message="Would you like to "
+                                   "update another option?",
+                                   choices=["Yes", "No"],), ]
+        answers = inquirer.prompt(yes_or_no)
+        print(f"You have selected {answers} \n")
+        break
+
+    return (answers["choice"])
+
+
+def update_field():
+    """
+    Calls the correct function to update the field value
+    based on outcome of select_field()
+    """
+    field = select_field()
+    age_range = range(18, 76, 1)
+    salary_range = range(100, 100001, 1)
+    year_range = range(1, 51, 1)
+    month_range = range(1, 11, 1)
+    if field == "Name":
+        return get_input("first name")
+    elif field == "Surname":
+        return get_input("surname")
+    elif field == "Age":
+        return get_number("age", "age", "18 to 75", age_range)
+    elif field == "Gender":
+        return get_gender()
+    elif field == "Department":
+        return get_input("department")
+    elif field == "Position":
+        return get_input("position")
+    elif field == "Monthly Salary":
+        return get_number("salary", "salary", "100 to 100 000",
+                          salary_range)
+    elif field == "Tenure -years":
+        return get_number("years of service", "years of service",
+                          "1 to 50", year_range)
+    elif field == "Tenure -months":
+        return get_number("months of service", "months of service",
+                          "1 to 11", month_range)
+    elif field == "Entry Date":
+        return get_date()
+
+
 def update_candidate():
     """
-    Reads the worksheet and utilises inquirer to
-    select a row based on column one - Employee Number
-    as the uniqu identifier. Allows the user to update
-    certain values in column one.
+    Calls the functions to use inquirer to select the
+    employee number and the datafield that the user
+    wishes to update
     """
-    select_field()
+    update_list = []
+    employ_no = select_employee()
+    update_list.append(employ_no)
+    field_updated = update_field()
+    update_list.append(field_updated)
+    update_another_field()
+    print(update_list)
 
 
 def main():
