@@ -2,6 +2,8 @@ import gspread
 from google.oauth2.service_account import Credentials
 import inquirer
 from datetime import datetime
+import pandas as pd
+import xlrd
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -233,7 +235,7 @@ def add_candidate():
     employee = [int(emp_number), emp_name, emp_surname, int(emp_age),
                 emp_gender, emp_department, emp_position, int(emp_salary),
                 int(emp_years), int(emp_months),
-                (emp_date), " ", "Active"]
+                (emp_date), " ", " ", " ", "Active"]
 
     update_sheet(employee, "redeployment_pool")
 
