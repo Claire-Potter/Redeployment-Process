@@ -3,7 +3,6 @@ from google.oauth2.service_account import Credentials
 import inquirer
 from datetime import datetime
 import pandas as pd
-import xlrd
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -146,7 +145,7 @@ def get_gender():
     while True:
         gender = [inquirer.List("gender",
                                 message="Please select the "
-                                "employee's gender :",
+                                "employee's gender",
                                 choices=["male", "female", "unknown", ],), ]
         answers = inquirer.prompt(gender)
         print("Valid gender selected \n")
@@ -240,19 +239,109 @@ def add_candidate():
     update_sheet(employee, "redeployment_pool")
 
 
+def retrieve_dataset(heading):
+    """
+    Utilises pandas to return the worksheet to python
+    """
+    wks = SHEET.worksheet("redeployment_pool")
+    data = wks.get_all_values()
+    headers = data.pop(0)
+    df = pd.DataFrame(data, columns=headers)
+    identifier = df[heading]
+    employee_list = identifier.to_list()
+    return employee_list
+
+
+def retrieve_headers():
+    """
+    Utilises pandas to return the worksheet to python
+    """
+    wks = SHEET.worksheet("redeployment_pool")
+    data = wks.get_all_values()
+    headers = data.pop(0)
+    return(headers)
+
+
+def select_employee():
+    """
+    Utilise the Employee Number as the identifier to select
+    the row of data to update
+    """
+    choices_list = retrieve_dataset('Employee Number')
+    while True:
+        employee_no = [inquirer.List("employee_number",
+                                     message="Please select the "
+                                     "employee number to update",
+                                     choices=choices_list,), ]
+        answers = inquirer.prompt(employee_no)
+        print(f"You have selected {answers} \n")
+        break
+
+    return (answers["employee_number"])
+
+
+def select_field():
+    """
+    Utilise the headers as the identifier to select
+    the column of data to update
+    """
+    select_employee()
+    headers = retrieve_headers()
+    options_list = []
+    options_list.extend([headers[1], headers[2], headers[3],
+                        headers[4], headers[5], headers[6],
+                        headers[7], headers[8], headers[9],
+                        headers[10]])
+    while True:
+        heading_options = [inquirer.List("update_option",
+                                         message="Please select the "
+                                         "option to update",
+                                         choices=options_list,), ]
+        answers = inquirer.prompt(heading_options)
+        print(f"You have selected {answers} \n")
+        break
+
+    return (answers["update_option"])
+
+
+def update_candidate():
+    """
+    Reads the worksheet and utilises inquirer to
+    select a row based on column one - Employee Number
+    as the uniqu identifier. Allows the user to update
+    certain values in column one.
+    """
+    select_field()
+
+
 def main():
-    questions = [inquirer.List("options",
-                 message="Please select the action"
-                 " you would like to perform:",
-                               choices=["Add a new candidate",
-                                        "Update candidate details",
-                                        "Place a candidate", "Retrench"
-                                        " a candidate"], ), ]
-    answers = inquirer.prompt(questions)
-    print("Thank you for your selection.")
-    options = answers["options"]
-    if options == "Add a new candidate":
-        add_candidate()
+    """
+    Utilises inquirer to provide the user a list of
+    actions to perform. Calls the relevant function
+    based on the action selected.
+    """
+    while True:
+        questions = [inquirer.List("options",
+                     message="Please select the action"
+                     " you would like to perform",
+                                   choices=["Add a new candidate",
+                                            "Update candidate details",
+                                            "Place a candidate", "Retrench"
+                                            " a candidate"],), ]
+        answers = inquirer.prompt(questions)
+        print("Thank you for your selection.")
+        break
+    selection = answers["options"]
+    if selection == "Add a new candidate":
+        return add_candidate()
+    elif selection == "Update candidate details":
+        return update_candidate()
+    elif selection == "Place a candidate":
+        return answers["options"]
+    elif selection == "Retrench a candidate":
+        return answers["options"]
+    else:
+        return answers["options"]
 
 
 print("Welcome to the capture screen for the Redeployment Process.")
