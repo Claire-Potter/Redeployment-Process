@@ -231,12 +231,13 @@ def add_candidate():
     emp_months = get_number("months of service", "months of service",
                             "1 to 11", month_range)
     emp_date = get_date()
-    employee = [emp_number, emp_name, emp_surname, int(emp_age),
+    employee = [int(emp_number), emp_name, emp_surname, int(emp_age),
                 emp_gender, emp_department, emp_position, int(emp_salary),
                 int(emp_years), int(emp_months),
-                (emp_date), " ", " ", " ", "Active"]
+                emp_date, " ", " ", " ", "Active"]
 
     update_sheet(employee, "redeployment_pool")
+    main()
 
 
 def retrieve_dataset(heading):
@@ -312,7 +313,7 @@ def update_another_field():
     while True:
         yes_or_no = [inquirer.List("choice",
                                    message="Would you like to "
-                                   "update another option?",
+                                   "return to the update menu?",
                                    choices=["Yes", "No"],), ]
         answers = inquirer.prompt(yes_or_no)
         print(f"You have selected {answers} \n")
@@ -392,18 +393,34 @@ def update_single_cell(emp_value, worksheet, column_value, change_value):
           f"updated with value: {change_value} \n")
 
 
+def update_process():
+    """
+    Calls the functions to use inquirer to select the
+    employee number and the datafield that the user
+    wishes to update. Calls the function to select/ input
+    new value and triggers the update of the worksheet single cell
+    """
+    emp_value = select_employee()
+    field_updated = update_field()
+    column_value = field_updated[0]
+    change_value = field_updated[1]
+    update_single_cell(emp_value, "redeployment_pool",
+                       column_value, change_value)
+
+
 def update_candidate():
     """
     Calls the functions to use inquirer to select the
     employee number and the datafield that the user
     wishes to update
     """
-    emp_value = str(select_employee())
-    field_updated = update_field()
-    column_value = field_updated[0]
-    change_value = field_updated[1]
-    update_single_cell(emp_value, "redeployment_pool",
-                       column_value, change_value)
+    update_process()
+    answer = update_another_field()
+    if answer == "Yes":
+        update_process()
+        update_another_field()
+    elif answer == "No":
+        main()
 
 
 def main():
@@ -414,12 +431,12 @@ def main():
     """
     while True:
         questions = [inquirer.List("options",
-                     message="Please select the action"
-                     " you would like to perform",
+                     message="Please select an action",
                                    choices=["Add a new candidate",
                                             "Update candidate details",
                                             "Place a candidate", "Retrench"
-                                            " a candidate"],), ]
+                                            " a candidate",
+                                            "Exit the process"],), ]
         answers = inquirer.prompt(questions)
         break
     selection = answers["options"]
@@ -431,8 +448,8 @@ def main():
         return answers["options"]
     elif selection == "Retrench a candidate":
         return answers["options"]
-    else:
-        return answers["options"]
+    elif selection == "Exit the process":
+        print("Thank you for your time")
 
 
 print("Welcome to the capture screen for the Redeployment Process.")
