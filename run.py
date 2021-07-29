@@ -240,5 +240,20 @@ def add_candidate():
     update_sheet(employee, "redeployment_pool")
 
 
+def main():
+    questions = [inquirer.List("options",
+                 message="Please select the action"
+                 " you would like to perform:",
+                               choices=["Add a new candidate",
+                                        "Update candidate details",
+                                        "Place a candidate", "Retrench"
+                                        " a candidate"], ), ]
+    answers = inquirer.prompt(questions)
+    print("Thank you for your selection.")
+    options = answers["options"]
+    if options == "Add a new candidate":
+        add_candidate()
+
+
 print("Welcome to the capture screen for the Redeployment Process.")
-add_candidate()
+main()
