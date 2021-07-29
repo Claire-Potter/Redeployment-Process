@@ -325,34 +325,57 @@ def update_field():
     Calls the correct function to update the field value
     based on outcome of select_field()
     """
+    new_fields = []
     field = select_field()
     age_range = range(18, 76, 1)
     salary_range = range(100, 100001, 1)
     year_range = range(1, 51, 1)
     month_range = range(1, 11, 1)
     if field == "Name":
-        return get_input("first name")
+        first_name = get_input("first name")
+        name = f"Name: {first_name},"
+        new_fields.append(name)
     elif field == "Surname":
-        return get_input("surname")
+        last_name = get_input("surname")
+        surname = f"Surname: {last_name}"
+        new_fields.append(surname)
     elif field == "Age":
-        return get_number("age", "age", "18 to 75", age_range)
+        how_old = get_number("age", "age", "18 to 75", age_range)
+        age = f" Age: {how_old}"
+        new_fields.append(age)
     elif field == "Gender":
-        return get_gender()
+        assignment = get_gender()
+        gender = f"Gender: {assignment}"
+        new_fields.append(gender)
     elif field == "Department":
-        return get_input("department")
+        depo = get_input("department")
+        department = f"Department: {depo},"
+        new_fields.append(department)
     elif field == "Position":
-        return get_input("position")
+        job = get_input("position")
+        position = f"Position: {job}"
+        new_fields.append(position)
     elif field == "Monthly Salary":
-        return get_number("salary", "salary", "100 to 100 000",
-                          salary_range)
+        paid = get_number("salary", "salary",
+                          "100 to 100 000", salary_range)
+        salary = f"Monthly Salary: {paid}"
+        new_fields.append(salary)
     elif field == "Tenure -years":
-        return get_number("years of service", "years of service",
-                          "1 to 50", year_range)
+        service_years = get_number("years of service",
+                                   "years of service", "1 to 50", year_range)
+        years = f"Tenure -years: {service_years}"
+        new_fields.append(years)
     elif field == "Tenure -months":
-        return get_number("months of service", "months of service",
-                          "1 to 11", month_range)
+        service_months = get_number("months of service",
+                                    "months of service", "1 to 11",
+                                    month_range)
+        months = f"Tenure -years: {service_months}"
+        new_fields.append(months)
     elif field == "Entry Date":
-        return get_date()
+        entry_date = get_date()
+        date = f"Entry Date: {entry_date}"
+        new_fields.append(date)
+    return new_fields
 
 
 def update_candidate():
@@ -366,7 +389,6 @@ def update_candidate():
     update_list.append(employ_no)
     field_updated = update_field()
     update_list.append(field_updated)
-    update_another_field()
     print(update_list)
 
 
@@ -385,7 +407,6 @@ def main():
                                             "Place a candidate", "Retrench"
                                             " a candidate"],), ]
         answers = inquirer.prompt(questions)
-        print("Thank you for your selection.")
         break
     selection = answers["options"]
     if selection == "Add a new candidate":
