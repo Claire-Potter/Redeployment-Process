@@ -231,7 +231,7 @@ def add_candidate():
     emp_months = get_number("months of service", "months of service",
                             "1 to 11", month_range)
     emp_date = get_date()
-    employee = [int(emp_number), emp_name, emp_surname, int(emp_age),
+    employee = [emp_number, emp_name, emp_surname, int(emp_age),
                 emp_gender, emp_department, emp_position, int(emp_salary),
                 int(emp_years), int(emp_months),
                 (emp_date), " ", " ", " ", "Active"]
@@ -275,9 +275,10 @@ def select_employee():
                                      choices=choices_list,), ]
         answers = inquirer.prompt(employee_no)
         print(f"You have selected {answers} \n")
+        employee_number = answers["employee_number"]
         break
 
-    return (answers["employee_number"])
+    return (employee_number)
 
 
 def select_field():
@@ -325,7 +326,7 @@ def update_field():
     Calls the correct function to update the field value
     based on outcome of select_field()
     """
-    new_fields = []
+    new_value = 0
     field = select_field()
     age_range = range(18, 76, 1)
     salary_range = range(100, 100001, 1)
@@ -333,49 +334,62 @@ def update_field():
     month_range = range(1, 11, 1)
     if field == "Name":
         first_name = get_input("first name")
-        name = f"Name: {first_name},"
-        new_fields.append(name)
+        name = "Name", f"{first_name}"
+        new_value = name
     elif field == "Surname":
         last_name = get_input("surname")
-        surname = f"Surname: {last_name}"
-        new_fields.append(surname)
+        surname = "Surname", f"{last_name}"
+        new_value = surname
     elif field == "Age":
         how_old = get_number("age", "age", "18 to 75", age_range)
-        age = f" Age: {how_old}"
-        new_fields.append(age)
+        age = "Age", f"{how_old}"
+        new_value = age
     elif field == "Gender":
         assignment = get_gender()
-        gender = f"Gender: {assignment}"
-        new_fields.append(gender)
+        gender = "Gender", f"{assignment}"
+        new_value = gender
     elif field == "Department":
         depo = get_input("department")
-        department = f"Department: {depo},"
-        new_fields.append(department)
+        department = "Department", f"{depo}"
+        new_value = department
     elif field == "Position":
         job = get_input("position")
-        position = f"Position: {job}"
-        new_fields.append(position)
+        position = "Position", f"{job}"
+        new_value = position
     elif field == "Monthly Salary":
         paid = get_number("salary", "salary",
                           "100 to 100 000", salary_range)
-        salary = f"Monthly Salary: {paid}"
-        new_fields.append(salary)
+        salary = "Monthly Salary", f"{paid}"
+        new_value = salary
     elif field == "Tenure -years":
         service_years = get_number("years of service",
                                    "years of service", "1 to 50", year_range)
-        years = f"Tenure -years: {service_years}"
-        new_fields.append(years)
+        years = "Tenure -years", f"{service_years}"
+        new_value = years
     elif field == "Tenure -months":
         service_months = get_number("months of service",
                                     "months of service", "1 to 11",
                                     month_range)
-        months = f"Tenure -years: {service_months}"
-        new_fields.append(months)
+        months = "Tenure -months", f"{service_months}"
+        new_value = months
     elif field == "Entry Date":
         entry_date = get_date()
-        date = f"Entry Date: {entry_date}"
-        new_fields.append(date)
-    return new_fields
+        date = "Entry Date", f"{entry_date}"
+        new_value = date
+    return new_value
+
+
+def update_single_cell(emp_value, worksheet, column_value, change_value):
+
+    print(f"Updating {worksheet} worksheet...\n")
+    sheet = SHEET.worksheet(worksheet)
+    cell = sheet.find(emp_value)
+    row_no = "%s" % (cell.row)
+    cell_2 = sheet.find(column_value)
+    col_no = "%s" % (cell_2.col)
+    sheet.update_cell(row_no, col_no, change_value)
+    print(f"{worksheet} cell: row{row_no}, col{col_no} successfully"
+          f"updated with value: {change_value} \n")
 
 
 def update_candidate():
@@ -384,12 +398,12 @@ def update_candidate():
     employee number and the datafield that the user
     wishes to update
     """
-    update_list = []
-    employ_no = select_employee()
-    update_list.append(employ_no)
+    emp_value = str(select_employee())
     field_updated = update_field()
-    update_list.append(field_updated)
-    print(update_list)
+    column_value = field_updated[0]
+    change_value = field_updated[1]
+    update_single_cell(emp_value, "redeployment_pool",
+                       column_value, change_value)
 
 
 def main():
