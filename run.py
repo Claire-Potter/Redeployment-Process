@@ -423,6 +423,102 @@ def update_candidate():
         main()
 
 
+def fetch_current_salary(worksheet, emp_value, column_value):
+    """
+    Fetches the current monthly salary of the
+    employee to utilise to update the new monthly
+    salary and calculate the difference.
+    """
+    print(f" Fetching current salary from {worksheet}...\n")
+    sheet = SHEET.worksheet(worksheet)
+    cell = sheet.find(emp_value)
+    row_no = "%s" % (cell.row)
+    cell_2 = sheet.find(column_value)
+    col_no = "%s" % (cell_2.col)
+    salary = sheet.cell(row_no, col_no).value
+    return salary
+
+
+def place_candidate():
+    """
+    Calls the functions required to select the employee
+    number and checks with the user if the new position includes
+    a decrease in salary, an increase in salary or if the salary
+    remains the same. Calls the function to capture the new salary
+    dependent on the selection.
+    """
+    print("You have chosed to place an employee.")
+    emp_value = select_employee()
+    print("Has there been a change in monthly salary?/n")
+
+    while True:
+        change_in_salary = [inquirer.List("salary_change",
+                                          message="Please select the "
+                                          "relevant option",
+                                          choices=["Decrease",
+                                                   "Remains the Same",
+                                                   "Increase"],), ]
+        answers = inquirer.prompt(change_in_salary)
+        print(f"You have selected {answers} \n")
+        break
+    salary_update = (answers["salary_change"])
+    department_position = choose_department_position()
+    department = department_position[0]
+    position = department_position[1]
+    current_salary = int(fetch_current_salary("redeployment_pool", emp_value,
+                                              "Monthly Salary"))
+    if salary_update == "Decrease":
+        salary_range = range(100, (current_salary - 1), 1)
+        range_value = range(100, (current_salary - 1), 1)
+        print(f"The current employee salary is: {current_salary}."
+              " Please capture the new decreased salary.")
+        paid = get_number("salary", "salary",
+                          range_value, salary_range)
+        print(f"The new salary has been captured as {paid}./n")
+        print("Calculating difference in salary")
+        difference = (int(paid) - current_salary)
+        status = ("Decreased")
+        print("Thank you for capturing the placement.")
+    elif salary_update == "Remains the Same":
+        print(f"The current employee salary is: {current_salary}."
+              " This will remain the same.")
+        paid = current_salary
+        difference = 0
+        status = ("Equal")
+    elif salary_update == "Increase":
+        salary_range = range((current_salary + 1), 100000, 1)
+        range_value = range((current_salary + 1), 100000, 1)
+        print(f"The current employee salary is: {current_salary}."
+              " Please capture the new increased salary.")
+        paid = get_number("salary", "salary",
+                          range_value, salary_range)
+        print(f"The new salary has been captured as {paid}./n")
+        print("Calculating difference in salary")
+        difference = (int(paid) - current_salary)
+        status = ("Increased")
+    print("Thank you for capturing the placement.")
+    placed_employee = [int(emp_value), department, position,
+                       int(current_salary), int(paid), int(difference), status]
+
+    update_sheet(placed_employee, "placed_candidates")
+    main()
+       
+
+def choose_department_position():
+    """
+    Choose the new department and the new position of the employee.
+    """
+    print("Please enter the New Department in which the"
+          " employee has been placed.")
+    depo = get_input("department")
+    print(f"The New Department has been set as {depo}. \n")
+    print("Please enter the New Position in which the"
+          " employee has been placed.")
+    job = get_input("position")
+    print(f"The New Position has been set as {job}. \n")
+    return (depo, job)
+
+
 def main():
     """
     Utilises inquirer to provide the user a list of
@@ -445,7 +541,7 @@ def main():
     elif selection == "Update candidate details":
         return update_candidate()
     elif selection == "Place a candidate":
-        return answers["options"]
+        return place_candidate()
     elif selection == "Retrench a candidate":
         return answers["options"]
     elif selection == "Exit the process":
