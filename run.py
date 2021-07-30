@@ -4,6 +4,7 @@ import inquirer
 from datetime import datetime
 import pandas as pd
 
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -375,8 +376,8 @@ def update_field():
         new_value = months
     elif field == "Entry Date":
         entry_date = get_date()
-        date = "Entry Date", f"{entry_date}"
-        new_value = date
+        date_one = "Entry Date", f"{entry_date}"
+        new_value = date_one
     return new_value
 
 
@@ -429,7 +430,7 @@ def fetch_current_salary(worksheet, emp_value, column_value):
     employee to utilise to update the new monthly
     salary and calculate the difference.
     """
-    print(f" Fetching current salary from {worksheet}...\n")
+    print(f"Fetching current salary from {worksheet}...\n")
     sheet = SHEET.worksheet(worksheet)
     cell = sheet.find(emp_value)
     row_no = "%s" % (cell.row)
@@ -438,6 +439,70 @@ def fetch_current_salary(worksheet, emp_value, column_value):
     salary = sheet.cell(row_no, col_no).value
     return salary
 
+
+def update_exit_date_status(worksheet, worksheet_two, emp_value):
+    """
+    Confirms that the employee has been added to the replaced
+    worksheet. Updates the exit date and status on the
+    redeployment_pool sheet.
+    """
+    print(f"Fetching employee number from {worksheet}...\n")
+    sheet = SHEET.worksheet(worksheet)
+    cell = sheet.find(emp_value)
+    try:
+        print("Employee has been placed.")
+        print("Updating exit date and status")
+        sheet = SHEET.worksheet(worksheet_two)
+        cell = sheet.find(emp_value)
+        row_no = "%s" % (cell.row)
+        cell_2 = sheet.find("Exit Date")
+        col_no = "%s" % (cell_2.col)
+        today_date = datetime.now().strftime('%d/%m/%Y')
+        sheet.update_cell(row_no, col_no, today_date)
+        print(f"{worksheet_two} cell: row{row_no}, col{col_no} successfully"
+              f"updated with value: {today_date} \n")
+        days_in_pool("redeployment_pool", emp_value)
+        cell_3 = sheet.find("Status")
+        col_2_no = "%s" % (cell_3.col)
+        status_value = "Placed"
+        sheet.update_cell(row_no, col_2_no, status_value)
+        print(f"{worksheet_two} cell: row{row_no}, col{col_2_no} successfully"
+              f"updated with value: {status_value} \n")
+    except ValueError as e:
+        print(f" A ValueError has occurred: {e}")
+        print("Please repeat the place employee process./n")
+
+
+def days_in_pool(worksheet, emp_value):
+    from datetime import date
+
+    print("Calculating days in pool...\n")
+    sheet = SHEET.worksheet(worksheet)
+    cell = sheet.find(emp_value)
+    row_no = "%s" % (cell.row)
+    cell_2 = sheet.find("Entry Date")
+    col_no = "%s" % (cell_2.col)
+    entry_date = (sheet.cell(row_no, col_no).value).split("/")
+    entry_year = int(entry_date[2])
+    entry_month = int(entry_date[1])
+    entry_day = int(entry_date[0])
+    cell_3 = sheet.find("Exit Date")
+    col_2_no = "%s" % (cell_3.col)
+    exit_date = (sheet.cell(row_no, col_2_no).value).split("/")
+    exit_year = int(exit_date[2])
+    exit_month = int(exit_date[1])
+    exit_day = int(exit_date[0])
+    d0 = date(entry_year, entry_month, entry_day)
+    d1 = date(exit_year, exit_month, exit_day)
+    days_in_pool = d1 - d0
+    days = str(days_in_pool)
+    days_no = (days[0] + days[1])
+    cell_4 = sheet.find("Days within Pool")
+    col_3_no = "%s" % (cell_4.col)
+    sheet.update_cell(row_no, col_3_no, int(days_no))
+    print(f"{worksheet} cell: row{row_no}, col{col_3_no} successfully"
+          f"updated with value: {days_no} \n")
+ 
 
 def place_candidate():
     """
@@ -501,8 +566,10 @@ def place_candidate():
                        int(current_salary), int(paid), int(difference), status]
 
     update_sheet(placed_employee, "placed_candidates")
+    update_exit_date_status("placed_candidates",
+                            "redeployment_pool", emp_value)
     main()
-       
+
 
 def choose_department_position():
     """
@@ -545,7 +612,7 @@ def main():
     elif selection == "Retrench a candidate":
         return answers["options"]
     elif selection == "Exit the process":
-        print("Thank you for your time")
+        print("Thank you for your time.")
 
 
 print("Welcome to the capture screen for the Redeployment Process.")
