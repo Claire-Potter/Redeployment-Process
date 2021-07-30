@@ -241,17 +241,26 @@ def add_candidate():
     main()
 
 
-def retrieve_dataset(heading):
+def retrieve_dataset(worksheet, heading):
     """
     Utilises pandas to return the worksheet to python
     """
-    wks = SHEET.worksheet("redeployment_pool")
+    wks = SHEET.worksheet(worksheet)
     data = wks.get_all_values()
     headers = data.pop(0)
     df = pd.DataFrame(data, columns=headers)
     identifier = df[heading]
     employee_list = identifier.to_list()
     return employee_list
+
+
+def remove_placed_retrenched_employees():
+    employees = retrieve_dataset("redeployment_pool", "Employee Number")
+    placed_employees = retrieve_dataset("placed_candidates", "Employee Number")
+    retrenched_employees = retrieve_dataset("retrenchment_package",
+                                            "Employee Number")
+    return [x for x in employees if x not in placed_employees
+            and x not in retrenched_employees]
 
 
 def retrieve_headers():
@@ -269,7 +278,7 @@ def select_employee():
     Utilise the Employee Number as the identifier to select
     the row of data to update
     """
-    choices_list = retrieve_dataset('Employee Number')
+    choices_list = remove_placed_retrenched_employees()
     while True:
         employee_no = [inquirer.List("employee_number",
                                      message="Please select the "
@@ -534,16 +543,15 @@ def place_candidate():
                                               "Monthly Salary"))
     if salary_update == "Decrease":
         salary_range = range(100, (current_salary - 1), 1)
-        range_value = range(100, (current_salary - 1), 1)
+        range_value = f"100 to {current_salary - 1}."
         print(f"The current employee salary is: {current_salary}."
               " Please capture the new decreased salary.")
         paid = get_number("salary", "salary",
                           range_value, salary_range)
-        print(f"The new salary has been captured as {paid}./n")
+        print(f"The new salary has been captured as {paid}.")
         print("Calculating difference in salary")
         difference = (int(paid) - current_salary)
         status = ("Decreased")
-        print("Thank you for capturing the placement.")
     elif salary_update == "Remains the Same":
         print(f"The current employee salary is: {current_salary}."
               " This will remain the same.")
@@ -552,12 +560,12 @@ def place_candidate():
         status = ("Equal")
     elif salary_update == "Increase":
         salary_range = range((current_salary + 1), 100000, 1)
-        range_value = range((current_salary + 1), 100000, 1)
+        range_value = f"{current_salary + 1} to 100000."
         print(f"The current employee salary is: {current_salary}."
               " Please capture the new increased salary.")
         paid = get_number("salary", "salary",
                           range_value, salary_range)
-        print(f"The new salary has been captured as {paid}./n")
+        print(f"The new salary has been captured as {paid}.")
         print("Calculating difference in salary")
         difference = (int(paid) - current_salary)
         status = ("Increased")
@@ -599,7 +607,7 @@ def main():
                                             "Update candidate details",
                                             "Place a candidate", "Retrench"
                                             " a candidate",
-                                            "Exit the process"],), ]
+                                            "Exit the process", "Test"],), ]
         answers = inquirer.prompt(questions)
         break
     selection = answers["options"]
@@ -613,6 +621,8 @@ def main():
         return answers["options"]
     elif selection == "Exit the process":
         print("Thank you for your time.")
+    elif selection == "Test":
+        print("Testing data")
 
 
 print("Welcome to the capture screen for the Redeployment Process.")
