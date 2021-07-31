@@ -440,12 +440,10 @@ def update_candidate():
     """
     update_process()
     answer = update_another_field()
-    while answer == "Yes":
+    if answer == "Yes":
         update_process()
         update_another_field()
-        break
-    if answer == "No":
-        main()
+    main()
 
 
 def fetch_current_salary(worksheet, emp_value, column_value):
