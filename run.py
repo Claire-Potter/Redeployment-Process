@@ -3,7 +3,7 @@ from google.oauth2.service_account import Credentials
 import inquirer
 from datetime import datetime
 import pandas as pd
-import numpy as np
+from IPython.display import display
 
 
 SCOPE = [
@@ -492,7 +492,7 @@ def update_exit_date_status(worksheet, worksheet_two, emp_value, status_value):
               f"updated with value: {status_value} \n")
     except ValueError as e:
         print(f" A ValueError has occurred: {e}")
-        print("Please repeat the place employee process./n")
+        print("Please repeat the place employee process.\n")
 
 
 def days_in_pool(worksheet, emp_value):
@@ -536,7 +536,7 @@ def place_candidate():
     """
     print("You have chosen to place an employee.")
     emp_value = select_employee()
-    print("Has there been a change in monthly salary?/n")
+    print("Has there been a change in monthly salary?\n")
 
     while True:
         change_in_salary = [inquirer.List("salary_change",
@@ -642,13 +642,156 @@ def retrench_employee():
     main()
 
 
-def display_redeployment_pool():
-    wks = SHEET.worksheet("redeployment_pool")
+def display_remove_rows(worksheet, sort_by, columns_list):
+    wks = SHEET.worksheet(worksheet)
     data = wks.get_all_values()
     headers = data.pop(0)
     df = pd.DataFrame(data, columns=headers)
-    df.style
-    render()
+    df = df.sort_values(by=sort_by)
+    df = df.drop(df.columns[columns_list], axis=1)
+    df = df.loc[df["Status"] != "Active"]
+    display((df.to_string(index=False)))
+
+
+def display_redeployment_pool(worksheet, sort_by, columns_list):
+    wks = SHEET.worksheet(worksheet)
+    data = wks.get_all_values()
+    headers = data.pop(0)
+    df = pd.DataFrame(data, columns=headers)
+    df = df.sort_values(by=sort_by)
+    df = df.drop(df.columns[columns_list], axis=1)
+    display((df.to_string(index=False)))
+
+
+def summary_report():
+    print("The below table displays the employees")
+    print("added to the redeployment pool.")
+    print("It has been sorted according to status.\n")
+
+    display_redeployment_pool("redeployment_pool", "Status",
+                              [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12])
+    print("  \n")
+    red_pool_tables()
+
+
+def personal_details_report():
+    print("The below table displays the personal")
+    print("details of employees added to the redeployment pool.")
+    print("It has been sorted according to gender.\n")
+
+    display_redeployment_pool("redeployment_pool", "Gender",
+                              [5, 6, 7, 8, 9, 10, 11, 12, 13])
+    print("  \n")
+    red_pool_tables()
+
+
+def placed_employees_report():
+    print("The below table displays the employees")
+    print("who have been placed in new positions.\n")
+
+    display_redeployment_pool("placed_candidates", "New Department",
+                              [3, 4, 5, 6])
+    print("  \n")
+    red_pool_tables()
+
+
+def department_position_report():
+    print("The below table displays the employees")
+    print("departments and positions.")
+    print("This is before placement.\n")
+
+    display_redeployment_pool("redeployment_pool", "Department",
+                              [1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13])
+    print("  \n")
+    red_pool_tables()
+
+
+def salary_comparison_report():
+    print("The below table displays the")
+    print("placed employees salary comparisons.")
+    print("It is sorted by Salary Status.\n")
+
+    display_redeployment_pool("placed_candidates", "Salary Status",
+                              [1, 2])
+    print("  \n")
+    red_pool_tables()
+
+
+def days_within_pool_report():
+    print("The below table displays the")
+    print("number of days each employee")
+    print("was in the redeployment pool.\n")
+
+    display_remove_rows("redeployment_pool", "Days within Pool",
+                        [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    print("  \n")
+    red_pool_tables()
+
+
+def salary_and_tenure_report():
+    print("The below table displays the")
+    print("salary and tenure of the employees.")
+    print("These figures are used in the")
+    print("retrenchment package calculation.\n")
+
+    display_redeployment_pool("redeployment_pool", "Monthly Salary",
+                              [1, 2, 3, 4, 5, 6, 10, 11, 12, 13])
+    print("  \n")
+    red_pool_tables()
+
+
+def retrenched_report():
+    print("The below table displays the")
+    print("retrenched employees.")
+    print("These retrenchment package")
+    print("calculation is (Salary * Tenure(years)) + (Salary * Months/12).\n")
+
+    display_redeployment_pool("retrenched_candidates", "Retrenchment Package",
+                              [])
+    print("  \n")
+    red_pool_tables() 
+
+
+def red_pool_tables():
+    """
+    Utilises inquirer to provide the user a list of
+    the available reports. Calls the relevant function
+    based on the report selected to display within terminal.
+    """
+    while True:
+        tables_select = [inquirer.List("tables",
+                                       message="Please select the table you"
+                                               " wish to view",
+                                       choices=["Redeployment Pool Summary",
+                                                "Personal Details Summary",
+                                                "Department and Position",                                            
+                                                "Placed Employees",
+                                                "Salary Comparison",
+                                                "Days within Pool",
+                                                "Salary and Tenure",
+                                                "Retrenched Employees",
+                                                "Return to Main Menu"],), ]
+        answers = inquirer.prompt(tables_select)
+        break
+    selection = answers["tables"]
+    if selection == "Redeployment Pool Summary":
+        summary_report()
+    elif selection == "Personal Details Summary":
+        personal_details_report()
+    elif selection == "Department and Position":
+        department_position_report()
+    elif selection == "Placed Employees":
+        placed_employees_report()
+    elif selection == "Salary Comparison":
+        salary_comparison_report()
+    elif selection == "Days within Pool":
+        days_within_pool_report()
+    elif selection == "Salary and Tenure":
+        salary_and_tenure_report()
+    elif selection == "Retrenched Employees":
+        retrenched_report()
+    elif selection == "Return to Main Menu":
+        main()
 
 
 def main():
@@ -664,7 +807,8 @@ def main():
                                             "Update candidate details",
                                             "Place a candidate", "Retrench"
                                             " a candidate",
-                                            "Exit the process", "Test"],), ]
+                                            "Data Tables",
+                                            "Exit the process"]), ]
         answers = inquirer.prompt(questions)
         break
     selection = answers["options"]
@@ -676,11 +820,12 @@ def main():
         return place_candidate()
     elif selection == "Retrench a candidate":
         return retrench_employee()
+    elif selection == "Data Tables":
+        return red_pool_tables()
     elif selection == "Exit the process":
         print("Thank you for your time.")
-    elif selection == "Test":
-        display_redeployment_pool()
 
 
-print("Welcome to the capture screen for the Redeployment Process.")
+print("  \n")
+print("Welcome to the capture screen for the Redeployment Process.\n")
 main()
