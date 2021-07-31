@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 import inquirer
 from datetime import datetime
 import pandas as pd
+import numpy as np
 
 
 SCOPE = [
@@ -641,6 +642,15 @@ def retrench_employee():
     main()
 
 
+def display_redeployment_pool():
+    wks = SHEET.worksheet("redeployment_pool")
+    data = wks.get_all_values()
+    headers = data.pop(0)
+    df = pd.DataFrame(data, columns=headers)
+    df.style
+    render()
+
+
 def main():
     """
     Utilises inquirer to provide the user a list of
@@ -669,7 +679,7 @@ def main():
     elif selection == "Exit the process":
         print("Thank you for your time.")
     elif selection == "Test":
-        print("test")
+        display_redeployment_pool()
 
 
 print("Welcome to the capture screen for the Redeployment Process.")
