@@ -49,10 +49,14 @@ def validate_number(value):
         int(value)
         if len(value) != 6:
             raise ValueError(
-                f"{len(value)}"
+                f"{len(value)} digits"
             )
+        employees = retrieve_dataset("redeployment_pool",
+                                     "Employee Number")
+        if value in employees:
+            raise ValueError(f"the duplicate employee number {value}")
     except ValueError as e:
-        print(f"Only a 6 digit number is accepted, you entered {e},"
+        print(f"Only a unique 6 digit number is accepted, you entered {e},"
               " please try again.\n")
         return False
 
@@ -235,7 +239,7 @@ def add_candidate():
     employee = [int(emp_number), emp_name, emp_surname, int(emp_age),
                 emp_gender, emp_department, emp_position, int(emp_salary),
                 int(emp_years), int(emp_months),
-                emp_date, " ", " ", " ", "Active"]
+                emp_date, " ", " ", "Active"]
 
     update_sheet(employee, "redeployment_pool")
     main()
@@ -257,7 +261,7 @@ def retrieve_dataset(worksheet, heading):
 def remove_placed_retrenched_employees():
     employees = retrieve_dataset("redeployment_pool", "Employee Number")
     placed_employees = retrieve_dataset("placed_candidates", "Employee Number")
-    retrenched_employees = retrieve_dataset("retrenchment_package",
+    retrenched_employees = retrieve_dataset("retrenched_candidates",
                                             "Employee Number")
     return [x for x in employees if x not in placed_employees
             and x not in retrenched_employees]
@@ -449,7 +453,7 @@ def fetch_current_salary(worksheet, emp_value, column_value):
     return salary
 
 
-def update_exit_date_status(worksheet, worksheet_two, emp_value):
+def update_exit_date_status(worksheet, worksheet_two, emp_value, status_value):
     """
     Confirms that the employee has been added to the replaced
     worksheet. Updates the exit date and status on the
@@ -459,7 +463,6 @@ def update_exit_date_status(worksheet, worksheet_two, emp_value):
     sheet = SHEET.worksheet(worksheet)
     cell = sheet.find(emp_value)
     try:
-        print("Employee has been placed.")
         print("Updating exit date and status")
         sheet = SHEET.worksheet(worksheet_two)
         cell = sheet.find(emp_value)
@@ -473,7 +476,7 @@ def update_exit_date_status(worksheet, worksheet_two, emp_value):
         days_in_pool("redeployment_pool", emp_value)
         cell_3 = sheet.find("Status")
         col_2_no = "%s" % (cell_3.col)
-        status_value = "Placed"
+        status_value = status_value
         sheet.update_cell(row_no, col_2_no, status_value)
         print(f"{worksheet_two} cell: row{row_no}, col{col_2_no} successfully"
               f"updated with value: {status_value} \n")
@@ -511,7 +514,7 @@ def days_in_pool(worksheet, emp_value):
     sheet.update_cell(row_no, col_3_no, int(days_no))
     print(f"{worksheet} cell: row{row_no}, col{col_3_no} successfully"
           f"updated with value: {days_no} \n")
- 
+
 
 def place_candidate():
     """
@@ -521,7 +524,7 @@ def place_candidate():
     remains the same. Calls the function to capture the new salary
     dependent on the selection.
     """
-    print("You have chosed to place an employee.")
+    print("You have chosen to place an employee.")
     emp_value = select_employee()
     print("Has there been a change in monthly salary?/n")
 
@@ -575,7 +578,7 @@ def place_candidate():
 
     update_sheet(placed_employee, "placed_candidates")
     update_exit_date_status("placed_candidates",
-                            "redeployment_pool", emp_value)
+                            "redeployment_pool", emp_value, "Placed")
     main()
 
 
@@ -592,6 +595,41 @@ def choose_department_position():
     job = get_input("position")
     print(f"The New Position has been set as {job}. \n")
     return (depo, job)
+
+
+def retrench_employee():
+    """
+    Calls the functions required to retrench an employee. Calculates the
+    retrenchment package. Add the new data  to the spreadsheet.
+    """
+    print("You have chosen to retrench an employee.")
+    emp_value = select_employee()
+    print("Calculating retrenchment package...\n")
+    print("Fetching salary...\n")
+    sheet = SHEET.worksheet("redeployment_pool")
+    cell = sheet.find(emp_value)
+    row_no = "%s" % (cell.row)
+    cell_2 = sheet.find("Monthly Salary")
+    col_no = "%s" % (cell_2.col)
+    salary_current = (sheet.cell(row_no, col_no).value)
+    print("Fetching Tenure -years...\n")
+    sheet = SHEET.worksheet("redeployment_pool")
+    cell_3 = sheet.find("Tenure -years")
+    col_2_no = "%s" % (cell_3.col)
+    tenure_years = (sheet.cell(row_no, col_2_no).value)
+    print("Fetching Tenure -months...\n")
+    sheet = SHEET.worksheet("redeployment_pool")
+    cell_4 = sheet.find("Tenure -months")
+    col_3_no = "%s" % (cell_4.col)
+    tenure_months = (sheet.cell(row_no, col_3_no).value)
+    package = ((int(salary_current) * int(tenure_years)) +
+               (int(tenure_months) // 12 * int(salary_current)))
+    print(f"Retrenchment package calculated as {package}.\n")
+    retrenched_employee = [emp_value, package]
+    update_sheet(retrenched_employee, "retrenched_candidates")
+    update_exit_date_status("retrenched_candidates",
+                            "redeployment_pool", emp_value, "Retrenched")
+    main()
 
 
 def main():
@@ -618,11 +656,11 @@ def main():
     elif selection == "Place a candidate":
         return place_candidate()
     elif selection == "Retrench a candidate":
-        return answers["options"]
+        return retrench_employee()
     elif selection == "Exit the process":
         print("Thank you for your time.")
     elif selection == "Test":
-        print("Testing data")
+        print("test")
 
 
 print("Welcome to the capture screen for the Redeployment Process.")
