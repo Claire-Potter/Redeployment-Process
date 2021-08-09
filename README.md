@@ -1,45 +1,78 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Redeployment Process
 
-Welcome Claire Potter,
+The redeployment process is utilised by a company undergoing change which results in certain positions becoming redundant. The process will be utilised to add affected employees to a redeployment pool, update employee details, place employees in new positions or retrench employees.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
+# UX Design
 
-## Gitpod Reminders
+### User Stories
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+1. The user is a person who works within the HR job family who is required to maintain the redeployment pool.
+2. The user will need to select between various actions in order to proceed.
+3. The first action should be to add a new employee to the redeployment pool.
+4. The user should be required to input or select the various data required to add an employee.
+5. All data captured should pass the specific validations in place to ensure accuracy.
+6. Once all fields are captured, the data should be consolidated into one list and saved to the redeployment pool database found in google sheets.
+7. The second action available should be to update the data of an employee within the redeployment pool.
+8. The user should be able to select the employee through the employee number as the unique identifier.
+9. If the employee is no longer active within the redeployment pool, the user should not be able to select them.
+10. The user should be able to select which field they wish to update.
+11. Once the field is selected, the necessary function to update the data should run.
+12. The user should be given the option to update another field or to return to the main menu.
+13. The next action the user should be able to perform is to place an employee.
+14. The place action should allow the user to place an employee within a new position in a new department.
+15. The user should be able to select whether the employee received a change in salary or not.
+16. The difference between old salary and new salary should be calculated.
+17. All data captured should be consolidated and added to the placed candidates sheet within the workbook.
+18. The relevant fields within the redeployment pool should be updated with the new data.
+19. The user should be able to action a retrenchment.
+20. The user should be able to select an employee from within the redeployment pool to retrench.
+21. This employee cannot have the status placed or retrenched already.
+22. Once the employee is selected, the retrenchment package should be calculated utilising information from within the redeployment pool.
+23. The data should be consolidated and saved to the retrenched candidates sheet within the workbook.
+24. The user should be able to view the data available in google sheets via the console.
 
-`python3 -m http.server`
 
-A blue button should appear to click: *Make Public*,
+## Strategy
 
-Another blue button should appear to click: *Open Browser*.
+I have taken some time to answer the following high-level strategic questions:
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+ 1. Is the content culturally appropriate? 
 
-A blue button should appear to click: *Make Public*,
+	The content needs to be instructional and professional. It is aimed at an English speaking business audience.
 
-Another blue button should appear to click: *Open Browser*.
+ 2. Is the content relevant? 
+ 
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+ - The content is made up of the following:
+   - An initial home menu, which provides clear instruction and the ability to select an action to proceed with.
+   - The four actions - add, update, place and retrench. Each action requires an appropriate description and instruction. All validations require clearly written error messages. When the functions are running, appropriate updates should be provided to keep the user in the loop.
+   - The data tables - the data tables should clearly display the relevant data as captured by the user. They should be appropriately labeled according to what data is displayed.
 
-## Updates Since The Instructional Video
+ 3. Can we track and catalogue the content in an intuitive way? 
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+  - The content is coded in python and thus displays within the console. This is because it is a back-end language utilised to collect data and accurately update the database.
+ - As a user begins the process, they will first encounter the main menu which provides them with the option to perform the four actions, view the data tables or exit the process. 
+ - The first action will allow them to add a user to the redeployment pool. It logically goes through the fields, asking for the correct data and validating before consolidating and adding it back to the redeployment pool. Once complete the user will be taken back to the main menu. 
+ - The second action will allow the user to update an employee within the redeployment pool. It only displays employees who are active within the pool, as once they are placed or retrenched, their data should no longer be changed. The user has the choice to continue to update different fields or to return to the menu.
+ - The third action allows the user to place the employee into a new position. This asks for new department, position and salary information and calculates the difference in salary. The user is asked each question in a logical order. Once again, only employees who are active within the pool can be selected. The user will be returned to the main menu when done.
+ - The fourth action enables the user to retrench an employee. This will be performed by selecting an active employee, the function will then calculate the retrenchment package and add the information to the database. The user will be directed back to the main menu when done.
+ - The next option on the main menu is to view data tables. This will take the user to a menu of tables to select from. These are labeled according to the data that they display and will print the table to the console. The setup is clear and simple to enable the user to view the necessary data clearly.
+ - The final option is to exit the process which will exit the user from the redeployment process.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+ 4. Is the technology appropriate?  
+	 
+	 The process is coded in Python. The database is setup in google sheets. The following imports are used to provide the necessary functionality:
+	 - gspread
+	 - inquirer
+	 - pandas
+	 - datetime
+	 - IPython.display
+	 
+The user will be able to access the process directly within the console.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+### High-level Business Goals
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
---------
-
-Happy coding!
+ - Create a functional programme to accurately complete the various actions within the redeployment process.
+ - Maintain the redeployment database within google sheets.
+ - Add validated data to google sheets and return relevant data when requested.
+ - Perform all calculations and return correct values.
