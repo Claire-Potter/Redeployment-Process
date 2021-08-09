@@ -1,6 +1,6 @@
 # Redeployment Process
 
-The redeployment process is utilised by a company undergoing change which results in certain positions becoming redundant. The process will be utilised to add affected employees to a redeployment pool, update employee details, place employees in new positions or retrench employees.
+The redeployment process is utilised by a company undergoing change which results in certain positions becoming redundant. The application will be utilised to add affected employees to a redeployment pool, update employee details, place employees in new positions or retrench employees.
 
 # The Redeployment Process
 
@@ -138,3 +138,44 @@ This site will be developed as a minimum viable product. Future releases could i
 
 1. Skill - This is the developer's first time working in Python so this presents a learning curve.
 2. Time - limited time to complete and deliver the site.
+
+## Structure
+Development conventions and best practice have been applied as far as possible to ensure that user expectations are met. The breakdown of the structure is available further down in this document within the features section.
+
+### Information Architecture
+
+![Application Hierarchy ](https://github.com/Claire-Potter/redeployment-process/blob/main/read-me-content/skeleton.jpeg)
+
+
+## Skeleton 
+
+The command-line interface was provided by Code Institute for this project.
+
+## Surface
+
+As this application is written in Python and displays within the command line, design aspects were minimal and provided for within the Code Institute template.
+
+## Technologies
+
+The process is coded in Python. The database is setup in google sheets. The following libraries are used to provide the necessary functionality:
+	  gspread
+	  inquirer
+	  pandas
+	  datetime
+	  IPython.display
+	  
+Google cloud platform is utilised to create the API between the application and google sheets.
+
+The user will be able to access the application through the command-line.
+
+Other technologies:
+
+1. Lucidchart - https://lucid.app/lucidchart
+ 	* To create the process
+2. Gitpod
+	* Platform used to develop and test site.
+3. Github
+	* Platform used to host repository and deployed site.
+4. Markdown Monster
+	* Used to edit Markdown
+
