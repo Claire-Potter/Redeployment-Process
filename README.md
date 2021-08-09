@@ -2,6 +2,13 @@
 
 The redeployment process is utilised by a company undergoing change which results in certain positions becoming redundant. The process will be utilised to add affected employees to a redeployment pool, update employee details, place employees in new positions or retrench employees.
 
+# The Redeployment Process
+
+Please follow the below link to view the redeployment process:
+
+ <a href="https://github.com/Claire-Potter/redeployment-process/blob/main/read-me-content/redeployment-pool-process.pdf">The Redeployment Process</a>
+
+
 # UX Design
 
 ### User Stories
@@ -76,3 +83,30 @@ The user will be able to access the process directly within the console.
  - Maintain the redeployment database within google sheets.
  - Add validated data to google sheets and return relevant data when requested.
  - Perform all calculations and return correct values.
+
+### Value
+
+The value of the redeployment process is that it allows the user to fully maintain the redeployment database.
+This ensures that the employee data is accurate and can be fed to recruitment systems, payroll and the database can be utilised to create reports and dashboards.
+As the database is updated as and when actions occur this provides the company with the ability to provide regular live updates on the redeployment process. It also allows the company to accurately track placement costs/savings, retrenchment costs and the ultimate value provided by the redeployment process. Additional to this, all data is validated ensuring accuracy and avoiding duplication.
+
+### Trade-offs
+
+Using the trade-off process to rank the importance and feasibility of the opportunities I have decided:
+
+1. To go ahead with 10/13 of the opportunities.
+2. I will not be creating a front end site to complete the process on as this is a minimum viable product.
+3. This would be a future opportunity to explore.
+
+![Table depicting the Importance rating vs. the Feasibility rating per Opportunity](https://github.com/Claire-Potter/redeployment-process/blob/main/read-me-content/trade-offs-table.PNG)
+   
+
+## Scope
+To provide a redeployment process to be utilised to add affected employees to a redeployment pool, update employee details, place employees in new positions or retrench employees. To be able to update the google sheets database as well as return data when required.
+
+### Feature Trade Off
+
+ <a href="https://github.com/Claire-Potter/redeployment-process/blob/main/read-me-content/feature-trade-offs.PNG">Feature Trade Off Table</a>
+
+
+This site will be developed as a minimum viable product. Future releases could include additional functionality depending on the success of the first release. This could be include a front-end website to complete the process on as well as generate the tables and data charts.
