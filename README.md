@@ -149,7 +149,9 @@ Development conventions and best practice have been applied as far as possible t
 
 ## Skeleton 
 
-The command-line interface was provided by Code Institute for this project.
+Please follow the below link to view the wireframes for the application:
+
+ <a href="https://github.com/Claire-Potter/redeployment-process/tree/main/read-me-content/wireframes">Wireframes</a>
 
 ## Surface
 
