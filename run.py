@@ -1,3 +1,4 @@
+# Import additional libraries to utilise functionality.
 import gspread
 from google.oauth2.service_account import Credentials
 import inquirer
@@ -5,6 +6,9 @@ from datetime import datetime
 import pandas as pd
 from IPython.display import display
 
+# Setup the scope and credentials for
+# accessing google sheets. This was created as per the
+# Code Institute Love Sandwiches project.
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -28,6 +32,9 @@ def get_employee_number():
     which must be a string of 6 numbers and it cannot be
     a duplicate employee number.
     The loop will repeatedly request data, until it is valid.
+    This function was created based on the get_sales_data() function
+    created in the Code Institute Love Sandwiches project. It has been
+    adjusted to align with this application's requirements.
     """
     while True:
         print("Please enter a six digit employee number.")
@@ -52,6 +59,9 @@ def validate_number(value):
     or if there aren't exactly 6 values. The second validation checks
     if the string exists in the employee list from the redeployment pool,
     if it does the user is notified to enter a unique value.
+    This function was created based on the validate_data(values) function
+    created in the Code Institute Love Sandwiches project. It has been
+    adjusted to align with this application's requirements
     """
     try:
         int(value)
@@ -192,6 +202,8 @@ def validate_date(my_str_date):
     """
     Raises ValueError if strings cannot be converted into a date and
     if it is in the incorrect format.
+    The following article was refernced to convert to date:
+    https://stackoverflow.com/questions/52260789/update-googlesheet-cell-with-timestamp-from-python
     """
     try:
         if datetime.strptime(my_str_date, "%d/%m/%Y"):
@@ -211,6 +223,9 @@ def update_sheet(data, worksheet):
     """
     Receives a list of values to be inserted into a worksheet
     Updates the relevant worksheet with the data provided.
+    This function was created based on the update_worksheet(data, worksheet)
+    function created in the Code Institute Love Sandwiches project.
+    It has been adjusted to align with this application's requirements.
     """
     print(f"Updating {worksheet} worksheet...\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
@@ -223,6 +238,8 @@ def add_candidate():
     Run all program functions to add a candidate to the
     Redeployment Process and save the data to the redeployment pool
     worksheet.
+    The following article was referenced to return a cell's address:
+    https://github.com/burnash/gspread/issues/41
     """
     print("Please proceed to add a new employee.\n")
     age_range = range(18, 76, 1)
@@ -256,9 +273,14 @@ def add_candidate():
     main()
 
 
+# The below functions are used to select an employee and update data.
+
+
 def retrieve_dataset(worksheet, heading):
     """
-    Utilises pandas to return the worksheet to python
+    Utilises pandas to return the worksheet to python.
+    The employee list is utilised by the user to select
+    an employee.
     """
     wks = SHEET.worksheet(worksheet)
     data = wks.get_all_values()
@@ -270,17 +292,28 @@ def retrieve_dataset(worksheet, heading):
 
 
 def remove_placed_retrenched_employees():
+    """
+    Takes the employee list retrieved and removes any
+    employee numbers from it if they exist on the placed
+    list or the retrenched list. Only active employee numbers
+    will be left.
+    The following article was referenced with regards to the list
+    comprehension:
+    https://stackoverflow.com/questions/35713093/how-can-i-compare-two-lists-in-python-and-return-not-matches/35713174
+    """
     employees = retrieve_dataset("redeployment_pool", "Employee Number")
-    placed_employees = retrieve_dataset("placed_candidates", "Employee Number")
-    retrenched_employees = retrieve_dataset("retrenched_candidates",
+    placed_employees = retrieve_dataset("placed_employees", "Employee Number")
+    retrenched_employees = retrieve_dataset("retrenched_employees",
                                             "Employee Number")
-    return [x for x in employees if x not in placed_employees
-            and x not in retrenched_employees]
+    return [x for x in employees if x not in
+            placed_employees and x not in retrenched_employees]
 
 
 def retrieve_headers():
     """
-    Utilises pandas to return the worksheet to python
+    Utilises pandas to return the worksheet to python.
+    The headers are retrieved to create a picklist of
+    fields the user can choose to update.
     """
     wks = SHEET.worksheet("redeployment_pool")
     data = wks.get_all_values()
@@ -291,7 +324,8 @@ def retrieve_headers():
 def select_employee():
     """
     Utilise the Employee Number as the identifier to select
-    the row of data to update
+    the row of data to update. Utilises inquirer functionality to
+    create and format the list.
     """
     choices_list = remove_placed_retrenched_employees()
     while True:
@@ -310,7 +344,10 @@ def select_employee():
 def select_field():
     """
     Utilise the headers as the identifier to select
-    the column of data to update
+    the column of data to update. Utilises inquirer functionality to
+    create and format the list. The list.extend function was used as per
+    the stackoverflow post:
+    https://stackoverflow.com/questions/20196159/how-to-append-multiple-values-to-a-list-in-python/20196202
     """
     headers = retrieve_headers()
     options_list = []
@@ -349,7 +386,7 @@ def update_another_field():
 
 def update_field():
     """
-    Calls the correct function to update the field value
+    Uses if/elif/else to call the correct function to update the field value
     based on outcome of select_field()
     """
     new_value = 0
@@ -406,7 +443,15 @@ def update_field():
 
 
 def update_single_cell(emp_value, worksheet, column_value, change_value):
-
+    """
+    Uses the employee number and the header to find the correct
+    cell in the spreadsheet to update. Overwrites with the new
+    value provided by the user. The following article was referenced
+    to update a single cell value:
+    https://docs.gspread.org/en/latest/user-guide.html#finding-a-cell
+    The following article was referenced to return a cell's address:
+    https://github.com/burnash/gspread/issues/41
+    """
     print(f"Updating {worksheet} worksheet...\n")
     sheet = SHEET.worksheet(worksheet)
     cell = sheet.find(emp_value)
@@ -447,11 +492,19 @@ def update_candidate():
     main()
 
 
+# The below functions are used to place an employee into
+# a new position and add them to the placed employees sheet
+
+
 def fetch_current_salary(worksheet, emp_value, column_value):
     """
     Fetches the current monthly salary of the
     employee to utilise to update the new monthly
     salary and calculate the difference.
+    The following article was referenced to locate data using cell coordinates:
+    https://www.makeuseof.com/tag/read-write-google-sheets-python/
+    The following article was referenced to return a cell's address:
+    https://github.com/burnash/gspread/issues/41
     """
     print(f"Fetching current salary from {worksheet}...\n")
     sheet = SHEET.worksheet(worksheet)
@@ -465,9 +518,16 @@ def fetch_current_salary(worksheet, emp_value, column_value):
 
 def update_exit_date_status(worksheet, worksheet_two, emp_value, status_value):
     """
-    Confirms that the employee has been added to the replaced
+    Confirms that the employee has been added to the placed
     worksheet. Updates the exit date and status on the
     redeployment_pool sheet.
+    The following article was referenced
+    to update a single cell value:
+    https://docs.gspread.org/en/latest/user-guide.html#finding-a-cell4
+    The following article was referenced to return a cell's address:
+    https://github.com/burnash/gspread/issues/41
+    The following article was refernced to convert to date:
+    https://stackoverflow.com/questions/52260789/update-googlesheet-cell-with-timestamp-from-python
     """
     print(f"Fetching employee number from {worksheet}...\n")
     sheet = SHEET.worksheet(worksheet)
@@ -496,6 +556,22 @@ def update_exit_date_status(worksheet, worksheet_two, emp_value, status_value):
 
 
 def days_in_pool(worksheet, emp_value):
+    """
+    Retrieves the entry date and exit date from the redeployment pool
+    sheet and splits the values into year, month and day.
+    Calculates the days within the pool and adds it back to the sheet.
+    The following article was referenced
+    to update a single cell value:
+    https://docs.gspread.org/en/latest/user-guide.html#finding-a-cell
+    The following article was referenced to locate data using cell coordinates:
+    https://www.makeuseof.com/tag/read-write-google-sheets-python/
+    The following article was referenced to return a cell's address:
+    https://github.com/burnash/gspread/issues/41
+    The following article was referenced for the days in pool calculation:
+    https://stackoverflow.com/questions/151199/how-to-calculate-number-of-days-between-two-given-dates
+    The following article was referenced to split the string:
+    https://stackoverflow.com/questions/7844118/how-to-convert-comma-delimited-string-to-list-in-python
+    """
     from datetime import date
 
     print("Calculating days in pool...\n")
@@ -586,8 +662,8 @@ def place_candidate():
     placed_employee = [int(emp_value), department, position,
                        int(current_salary), int(paid), int(difference), status]
 
-    update_sheet(placed_employee, "placed_candidates")
-    update_exit_date_status("placed_candidates",
+    update_sheet(placed_employee, "placed_employees")
+    update_exit_date_status("placed_employees",
                             "redeployment_pool", emp_value, "Placed")
     main()
 
@@ -607,10 +683,17 @@ def choose_department_position():
     return (depo, job)
 
 
+# The below function is utilised to retrench an employee
+
+
 def retrench_employee():
     """
     Calls the functions required to retrench an employee. Calculates the
     retrenchment package. Add the new data  to the spreadsheet.
+    The following article was referenced to locate data using cell coordinates:
+    https://www.makeuseof.com/tag/read-write-google-sheets-python/
+    The following article was referenced to return a cell's address:
+    https://github.com/burnash/gspread/issues/41
     """
     print("You have chosen to retrench an employee.")
     emp_value = select_employee()
@@ -636,13 +719,31 @@ def retrench_employee():
                (int(tenure_months) // 12 * int(salary_current)))
     print(f"Retrenchment package calculated as {package}.\n")
     retrenched_employee = [emp_value, package]
-    update_sheet(retrenched_employee, "retrenched_candidates")
-    update_exit_date_status("retrenched_candidates",
+    update_sheet(retrenched_employee, "retrenched_employees")
+    update_exit_date_status("retrenched_employees",
                             "redeployment_pool", emp_value, "Retrenched")
     main()
 
 
+# The below functions are utilised to fetch the worksheets,
+# and setup the dataframe display to display the data tables in
+# the console.
+
+
 def display_remove_rows(worksheet, sort_by, columns_list):
+    """
+    Fetches the worksheet from google sheets. Returns all
+    data and creates headers as columns. Sorts the data, and
+    drops unwanted columns. Removes rows of employees who's
+    status is Active. Removes the index from the display.
+    The following article was referenced to create the .loc
+    code:
+    https://re-thought.com/how-to-change-or-update-a-cell-value-in-python-pandas-dataframe/
+    The following article was referenced for dataframe formatting:
+    https://mode.com/example-gallery/python_dataframe_styling/
+    The following article was referenced to hide columns and index:
+    https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.io.formats.style.Styler.hide_columns.html#pandas.io.formats.style.Styler.hide_columns
+    """
     wks = SHEET.worksheet(worksheet)
     data = wks.get_all_values()
     headers = data.pop(0)
@@ -654,6 +755,15 @@ def display_remove_rows(worksheet, sort_by, columns_list):
 
 
 def display_redeployment_pool(worksheet, sort_by, columns_list):
+    """
+    Fetches the worksheet from google sheets. Returns all
+    data and creates headers as columns. Sorts the data, and
+    drops unwanted columns. Removes the index from the display.
+    The following article was referenced for dataframe formatting:
+    https://mode.com/example-gallery/python_dataframe_styling/
+    The following article was referenced to hide columns and index:
+    https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.io.formats.style.Styler.hide_columns.html#pandas.io.formats.style.Styler.hide_columns
+    """
     wks = SHEET.worksheet(worksheet)
     data = wks.get_all_values()
     headers = data.pop(0)
@@ -664,6 +774,10 @@ def display_redeployment_pool(worksheet, sort_by, columns_list):
 
 
 def summary_report():
+    """
+    Calls the function to fetch the data. Displays the
+    redeployment pool summary table.
+    """
     print("The below table displays the employees")
     print("added to the redeployment pool.")
     print("It has been sorted according to status.\n")
@@ -675,6 +789,10 @@ def summary_report():
 
 
 def personal_details_report():
+    """
+    Calls the function to fetch the data. Displays the
+    personal details summary table.
+    """
     print("The below table displays the personal")
     print("details of employees added to the redeployment pool.")
     print("It has been sorted according to gender.\n")
@@ -686,16 +804,24 @@ def personal_details_report():
 
 
 def placed_employees_report():
+    """
+    Calls the function to fetch the data. Displays the
+    placed employees summary table.
+    """
     print("The below table displays the employees")
     print("who have been placed in new positions.\n")
 
-    display_redeployment_pool("placed_candidates", "New Department",
+    display_redeployment_pool("placed_employees", "New Department",
                               [3, 4, 5, 6])
     print("  \n")
     red_pool_tables()
 
 
 def department_position_report():
+    """
+    Calls the function to fetch the data. Displays the
+    department and position summary table.
+    """
     print("The below table displays the employees")
     print("departments and positions.")
     print("This is before placement.\n")
@@ -707,17 +833,25 @@ def department_position_report():
 
 
 def salary_comparison_report():
+    """
+    Calls the function to fetch the data. Displays the
+    salary comparison summary table.
+    """
     print("The below table displays the")
     print("placed employees salary comparisons.")
     print("It is sorted by Salary Status.\n")
 
-    display_redeployment_pool("placed_candidates", "Salary Status",
+    display_redeployment_pool("placed_employees", "Salary Status",
                               [1, 2])
     print("  \n")
     red_pool_tables()
 
 
 def days_within_pool_report():
+    """
+    Calls the function to fetch the data. Displays the
+    days within the pool summary table.
+    """
     print("The below table displays the")
     print("number of days each employee")
     print("was in the redeployment pool.\n")
@@ -729,6 +863,10 @@ def days_within_pool_report():
 
 
 def salary_and_tenure_report():
+    """
+    Calls the function to fetch the data. Displays the
+    salary and tenure summary table.
+    """
     print("The below table displays the")
     print("salary and tenure of the employees.")
     print("These figures are used in the")
@@ -741,15 +879,19 @@ def salary_and_tenure_report():
 
 
 def retrenched_report():
+    """
+    Calls the function to fetch the data. Displays the
+    retrenched employees summary table.
+    """
     print("The below table displays the")
     print("retrenched employees.")
     print("These retrenchment package")
     print("calculation is (Salary * Tenure(years)) + (Salary * Months/12).\n")
 
-    display_redeployment_pool("retrenched_candidates", "Retrenchment Package",
+    display_redeployment_pool("retrenched_employees", "Retrenchment Package",
                               [])
     print("  \n")
-    red_pool_tables() 
+    red_pool_tables()
 
 
 def red_pool_tables():
@@ -764,7 +906,7 @@ def red_pool_tables():
                                                " wish to view",
                                        choices=["Redeployment Pool Summary",
                                                 "Personal Details Summary",
-                                                "Department and Position",                                            
+                                                "Department and Position",
                                                 "Placed Employees",
                                                 "Salary Comparison",
                                                 "Days within Pool",
@@ -792,6 +934,10 @@ def red_pool_tables():
         retrenched_report()
     elif selection == "Return to Main Menu":
         main()
+
+
+# The below function calls the main menu from which the user
+# selects the relevant actions to follow
 
 
 def main():
