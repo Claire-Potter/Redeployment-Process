@@ -25,7 +25,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("redeployment_report")
 
 # The below code is utilised to perform the action of adding a
-# new candidate to the redeployment pool.
+# new employee to the redeployment pool.
 
 
 def get_employee_number():
@@ -249,7 +249,7 @@ def validate_date(my_str_date):
         ValueError if the captured_date is greater than or equal to
         today's date.
     References:
-        The following article was refernced to convert to date:
+        The following article was referenced to convert to date:
         https://stackoverflow.com/questions/52260789/update-googlesheet-cell-with-timestamp-from-python
     """
     try:
@@ -287,9 +287,9 @@ def update_sheet(data, worksheet):
     print(f"{worksheet} worksheet updated successfully.\n")
 
 
-def add_candidate():
+def add_employee():
     """
-    Run all program functions to add a candidate to the
+    Run all program functions to add an employee to the
     Redeployment Process and save the data to the redeployment pool
     worksheet.
     References:
@@ -549,7 +549,7 @@ def update_process():
                        column_value, change_value)
 
 
-def update_candidate():
+def update_employee():
     """
     Calls the functions to use inquirer to select the
     employee and the datafield that the user
@@ -614,7 +614,7 @@ def update_exit_date_status(worksheet, worksheet_two, emp_value, status_value):
         https://docs.gspread.org/en/latest/user-guide.html#finding-a-cell4
         The following article was referenced to return a cell's address:
         https://github.com/burnash/gspread/issues/41
-        The following article was refernced to convert to date:
+        The following article was referenced to convert to date:
         https://stackoverflow.com/questions/52260789/update-googlesheet-cell-with-timestamp-from-python
     """
     print(f"Fetching employee number from {worksheet}...\n")
@@ -695,7 +695,7 @@ def days_in_pool(worksheet, emp_value):
           f"updated with value: {days_no} \n")
 
 
-def place_candidate():
+def place_employee():
     """
     Calls the functions required to select the employee
     number and checks with the user if the new position includes
@@ -1080,23 +1080,23 @@ def main():
     while True:
         questions = [{"type": "list",
                      "message": "Please select an action",
-                      "choices": ["Add a new candidate",
-                                  "Update candidate details",
-                                  "Place a candidate", "Retrench"
-                                  " a candidate",
+                      "choices": ["Add a new employee",
+                                  "Update employee details",
+                                  "Place an employee", "Retrench"
+                                  " an employee",
                                   "Data Tables",
                                   "Exit the process"], }, ]
         result = prompt(questions)
         name = result[0]
         break
     selection = name
-    if selection == "Add a new candidate":
-        return add_candidate()
-    elif selection == "Update candidate details":
-        return update_candidate()
-    elif selection == "Place a candidate":
-        return place_candidate()
-    elif selection == "Retrench a candidate":
+    if selection == "Add a new employee":
+        return add_employee()
+    elif selection == "Update employee details":
+        return update_employee()
+    elif selection == "Place an employee":
+        return place_employee()
+    elif selection == "Retrench an employee":
         return retrench_employee()
     elif selection == "Data Tables":
         return red_pool_tables()
