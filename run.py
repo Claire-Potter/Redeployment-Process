@@ -242,6 +242,8 @@ def validate_date(my_str_date):
     Raises:
         ValueError if string cannot be converted into a date and
         if it is in the incorrect format.
+        ValueError if the captured_date is greater than or equal to 
+        today's date.
     References:
         The following article was refernced to convert to date:
         https://stackoverflow.com/questions/52260789/update-googlesheet-cell-with-timestamp-from-python
@@ -343,8 +345,8 @@ def retrieve_dataset(worksheet, columns_list):
     df = df.loc[df["Status"] != "Placed"]
     df = df.loc[df["Status"] != "Retrenched"]
     df = df.drop(df.columns[columns_list], axis=1)
-    df['combined'] = df.values.tolist()
-    employees = df['combined'].tolist()
+    df["combined"] = df.values.tolist()
+    employees = df["combined"].tolist()
     emp_list = list(map(" ".join, employees))
     return emp_list
 
@@ -619,7 +621,7 @@ def update_exit_date_status(worksheet, worksheet_two, emp_value, status_value):
         row_no = "%s" % (cell.row)
         cell_2 = sheet.find("Exit Date")
         col_no = "%s" % (cell_2.col)
-        today_date = datetime.now().strftime('%d/%m/%Y')
+        today_date = datetime.now().strftime("%d/%m/%Y")
         sheet.update_cell(row_no, col_no, today_date)
         print(f"{worksheet_two} cell: row{row_no}, col{col_no} successfully"
               f"updated with value: {today_date} \n")
