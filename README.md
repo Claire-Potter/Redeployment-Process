@@ -596,7 +596,7 @@ The user will be returned to the main menu.
 	    
 When a user selects to retrench an employee, the employee menu will display for the user to select an employee from. Note that the employee Dale Jason, who was placed, no longer reflects on the menu as his status is no longer active.
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/31.retrench-employee-update-messages.PNG" 
      alt="retrench employee - updates" 
      style="display:block; 
             float:none; 
