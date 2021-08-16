@@ -219,6 +219,7 @@ def get_date():
     while True:
         print("Please enter the date of entry / start date")
         print("of the redeployment process for the employee.")
+        print("The date should occur before today's date.")
         print("Please enter in the format DD/MM/YYYY.")
         print("Example: 01/07/2021. \n")
 
@@ -246,13 +247,17 @@ def validate_date(my_str_date):
         https://stackoverflow.com/questions/52260789/update-googlesheet-cell-with-timestamp-from-python
     """
     try:
-        if datetime.strptime(my_str_date, "%d/%m/%Y"):
+        captured_date = datetime.strptime(my_str_date, "%d/%m/%Y")
+        if captured_date.date() >= datetime.today().date():
+            raise ValueError(f"{my_str_date} which is equal to"
+                             " or occurs after today.")
+        elif datetime.strptime(my_str_date, "%d/%m/%Y"):
             return datetime.strptime(my_str_date, "%d/%m/%Y")
         else:
             raise ValueError(f"{my_str_date}")
     except ValueError as e:
-        print(f"Incorrect data format,"
-              f" should be DD/MM/YYYY, you entered {e} ,"
+        print(f"The date format should be DD/MM/YYYY"
+              f" and it should occur before today's date, you entered {e} ,"
               " please try again.\n")
         return False
 
