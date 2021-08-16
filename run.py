@@ -1,10 +1,14 @@
 # Import additional libraries to utilise functionality.
 import gspread
 from google.oauth2.service_account import Credentials
+from InquirerPy import inquirer, prompt
 import inquirer
 from datetime import datetime
 import pandas as pd
 from IPython.display import display
+from prompt_toolkit import __version__ as ptk_version
+
+PTK3 = ptk_version.startswith('3.')
 
 # Setup the scope and credentials for
 # accessing google sheets. This was created as per the
@@ -196,15 +200,16 @@ def get_gender():
         string - gender selection.
     """
     while True:
-        gender = [inquirer.List("gender",
-                                message="Please select the "
-                                "employee's gender",
-                                choices=["male", "female", "unknown", ],), ]
-        answers = inquirer.prompt(gender)
+        gender = [{"type": "list",
+                   "message": "Please select the employee's gender",
+                   "choices": ["male", "female", "unknown"], }, ]
+        result = prompt(gender)
+        name = result[0]
         print("Valid gender selected \n")
+        print(name)
         break
 
-    return (answers["gender"])
+    return (name)
 
 
 def get_date():
@@ -1097,4 +1102,4 @@ def main():
 
 print("  \n")
 print("Welcome to the capture screen for the Redeployment Process.\n")
-main()
+get_gender()
