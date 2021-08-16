@@ -6,6 +6,47 @@ The redeployment process is utilised by a company undergoing change which result
 
 <a href="https://redeployment-process.herokuapp.com/" target="_blank">Click Here</a> to access the site.
 
+## Table of Contents
+
+<!-- Start Document Outline -->
+
+* [UX Design](#ux-design)
+
+	* [Redeployment Process](#redeployment-process)
+	* [User Stories](#user-stories)
+	* [Strategy](#strategy)
+		* [High-level Business Goals](#high-level-business-goals)
+		* [Value](#value)
+		* [Trade-offs](#trade-offs)
+	* [Scope](#scope)
+	  * [Feature Trade Off](#feature-trade-off)
+	  * [Release One Functional Requirements](#release-one-functional-requirements)
+	    * [Delivery Constraints](#delivery-constraints)
+	* [Structure](#structure)
+		* [Information Architecture](#information-architecture)
+	* [Skeleton](surface)
+	  * [Design Differences](#design-differences)
+	* [Surface](#surface)
+* [Technologies](#technologies)
+* [Features](#features)
+* [Testing](#testing)
+	* [Features Testing](#features-testing)
+	* [Bugs and Issues](#bugs-and-issues)
+	* [User Stories Testing](#user-stories-testing)
+	* [Code Validation](#code-validation)
+	* [Deployment Testing](#deployment-testing)
+* [Deployment](#deployment)
+	* [Development Interface](#development-interface)
+	* [Maintaining Code](#maintaining-code)
+	* [Page Deployment](#page-deployment)
+	* [How to Fork the Repository](#how-to-fork-the-repository) 
+* [References](#references)
+	* [Code](#code)
+	* [Content](#content)
+* [Acknowledgments](#acknowledgments)
+
+<!-- End Document Outline -->
+
 # The Redeployment Process
 
 Please follow the below link to view the redeployment process:
@@ -118,9 +159,7 @@ To provide a redeployment application to be utilised to add affected employees t
 
 This site will be developed as a minimum viable product. Future releases could include additional functionality depending on the success of the first release. This could include a front-end website to complete the process on as well as generate the tables and data charts.
 
-### Release One
-
-#### Functional Requirements
+### Release One Functional Requirements
 
 1. Command-line application
 2. Main menu prompting the user to choose an action
@@ -158,7 +197,7 @@ Please follow the below link to view the wireframes for the application:
 
  <a href="https://github.com/Claire-Potter/redeployment-process/tree/main/read-me-content/wireframes">Wireframes</a>
 
-## Design differences
+### Design differences
 
 1. Due to issues with the library inquirer, the library InquirerPy was utilised as this uses the latest python version and readchar version. Functions were updated to use the InquirerPy library.
 2. An additional validation was included within the start date validation function to ensure that the date is less than today's date. This is to prevent errors when calculating number of days in pool, as the exit date is set as today's date.
@@ -193,6 +232,537 @@ Other technologies:
 	* Platform used to host repository and deployed site.
 4. Markdown Monster
 	* Used to edit Markdown
+
+
+
+# Features
+
+The Redeployment Process app consists of the following Features:
+
+* [Features](#features)
+	* [Command Line Interface](#command-line-interface)
+	* [Main Menu](#main-menu)
+	* [Add Employee](#add-employee)
+	* [Update Employee](#update-employee)
+	* [Place Employee](#place-employee)
+	* [Retrench Employee](#retrench-employee)
+	* [Data Tables](#data-tables)
+	* [Features Left to Implement](#features-left-to-implement)
+	    
+## Command Line Interface
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/01.command-line-interface.PNG" 
+     alt="command line interface" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+
+The application is accessible through a command line interface, allowing the user to capture input and make selections according to the python code.
+
+## Main Menu
+
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/02.main-menu.PNG" 
+     alt="main menu" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+
+The InquirerPy  library is utilised to provide a main menu from which the user can select the necessary action that they wish to perform.
+This menu is the central starting and ending point of the application and provides access to the various actions available to the user. 
+Once an action is complete the main menu will be called to display again so that the user has the opportunity to perform another available action. This is to prevent the user from having to continuously re-run the application after each action. It streamlines the process.
+
+To end the application the user simply selects Exit the process. They will be thanked for their time and the application will end.
+
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/03.exit-process.PNG" 
+     alt="exit process" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+   
+## Add Employee
+
+The Add Employee Action is selected to add a new employee to the redeployment pool. The function will call the various functions to capture the necessary data and validate it. It will then call the function to save the new employee details as a row to the google sheets worksheet.
+
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/04.employee-number.PNG" 
+     alt="Add Employee - Employee Number" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+ 
+ The employee number is captured by the user as a six digit unique number. The validations in place will ensure that the number is six digits long and only consists of numeric characters. It will also compare the number to the existing employee numbers within the google sheets database to ensure it is a unique value. The employee number is left as a string and added to google sheets this way as it is better to use a string to look up other data than an integer.
+ 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/05.first-name.PNG" 
+     alt="Add Employee - Name" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+            
+The first name field is utilised to capture the first name of the employee. The data cannot be numeric. It does allow special characters as often names contain a dash -, a space, or pronunciation emphasis characters. When the first name is captured, the first letter of the name will be capitalised by the application and it will be saved as a string.
+
+ 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/06.surname.PNG" 
+     alt="Add Employee - Surname" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+            
+The surname field is utilised to capture the surname of the employee. The same function to validate the first name is used to validate the surname, the first letter of the surname will be capitalised by the application and it will be saved as a string.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/07.age.PNG" 
+     alt="Add Employee - Age" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+            
+The age field is utilised to capture the age of the employee. The user is provided with an age range of 18 - 75 and they need to enter an age within this range. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur. The age field is converted to an integer and saved.
+
+ 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/08.gender.PNG" 
+     alt="Add Employee - Gender" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+            
+InquirerPy is utilised once again to capture the gender of the employee. The user is provided with a list of values and they need to select one of the provided options. Validations are not required as the data is already provided for the user to choose from. The gender field is saved as a string.
+
+
+
+ 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/09.department.PNG" 
+     alt="Add Employee - Department" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+            
+The Department field is utilised to capture the business department of the employee. The same function used to validate text fields is utilised again here, the first letter of the department will be capitalised by the application and it will be saved as a string.
+
+
+
+ 
+  <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/10.position.PNG" 
+     alt="Add Employee - Position" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+            
+The Position field is utilised to capture the current position filled by the employee. The same function used to validate text fields is utilised again here, the first letter of the position will be capitalised by the application and it will be saved as a string.
+
+
+ 
+  <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/11.salary.PNG" 
+     alt="Add Employee - Salary" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+            
+The salary field is utilised to capture the current salary of the employee. The user is provided with a salary range of 100 - 100 000 and they need to enter a salary within this range. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur. The age field is converted to an integer and saved.
+
+
+ 
+  <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/12.tenure-years.PNG" 
+     alt="Add Employee - Tenure - years" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+            
+The years of service field is utilised to capture the number of years of service of the employee. The user is provided with a  range of 1 - 50 and they need to enter a number within this range. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur. The years of service field is converted to an integer and saved. This value is later utilised to calculate the redeployment package. It remains as a fixed value and will not include the additional time spent in the redeployment pool.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/13.tenure-months.PNG" 
+     alt="Add Employee - Tenure - months" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+            
+The months of service field is utilised to capture the number of months of service of the employee. The user is provided with a  range of 1 - 11 and they need to enter a number within this range. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur. The months of service field is converted to an integer and saved. This value is later utilised to calculate the redeployment package. It remains as a fixed value and will not include the additional time spent in the redeployment pool.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/14.start-date.PNG" 
+     alt="Add Employee - Start Date" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+            
+The start date / entry date field is utilised to capture the start date that the employee is added to the redeployment pool / begins the redeployment process. The date is validated to ensure it is captured in the format dd/mm/yyyy. An additional validation is in place to ensure that the date is less than today's date. This is to ensure that the calculation of number of days in the pool which happens when an employee is placed or retrenched will not error, as the exit date from the pool is captured as the current date, so the start date needs to be smaller than this date. A value error will occur if the date is captured incorrectly.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/15.update-messages.PNG" 
+     alt="Add Employee - Update Message" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+
+Once all of the fields are captured, the user will be notified that the application is busy updating the redeployment pool worksheet with the record. The user will be informed when this has been successfully saved and they will be returned to the main menu.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/16.data-added-to-worksheet.PNG" 
+     alt="Add Employee - added to sheet" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+            
+All of the data will be added in the correct order to a list and the application will call the function to add the new employee record as a row to the worksheet redeployment_pool  within the google sheet, thereby successfully updating the database.
+
+## Update Employee
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/17.update-employee.PNG" 
+     alt="update employee" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+The user can select the option update employee details, this will call a list containing the active employees within the redeployment pool. Once an employee has been placed or retrenched, their data can no longer be updated, as the redeployment process has been completed for them.
+
+
+The user will be presented with the list of active employees which contains the employee number, the first name and the surname. They can select the relevant employee to update. The employee number will be saved as a reference to select the correct record within google sheets to update.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/18.update-options.PNG" 
+     alt="update options" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+	    
+	    
+Once an employee has been selected, the user will be presented with a list of options to choose from. These are the various data fields within the redeployment pool. Each option will call the relevant function, as per the functions used within the add employee action, to update and validate the new value for the field.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/19.update-capture.PNG" 
+     alt="update captured" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+	    
+	    
+The user will utilise the input field to capture the new value.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/20.update-complete-return-to-menu.PNG" 
+     alt="update complete return to menu" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+            
+Once the user has entered their update, the application will save the data change to the sheet and let the user know once completed. The user will be presented with the option to select whether they would like to return to the update options menu to update another record. If they select yes, the update action will run again. If they select no, they will be returned to the main menu.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/21.update-saved.PNG" 
+     alt="updated cell" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+             ">
+             
+Only the cell that has been updated by the user will be changed within the google sheet. All other values will remain the same.
+
+## Place Employee
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/22.place-employee-select.PNG" 
+     alt="place employee" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+When the user selects the action to place an employee, the select employee menu with the active employees is returned. The user can then select the relevant employee to place.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/23.change-in-salary.PNG" 
+     alt="change in salary" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+	    
+	    
+The user is asked if there has been a change in the employee's salary. They can select if it has been decreased, remained the same or increased. The users selection is saved.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/24.new-department.PNG" 
+     alt="new department" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+	    
+The user is requested to capture the new department of the employee. This will be the department that the employee has been placed within.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/25.new-position.PNG" 
+     alt="new position" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+	    
+The user is requested to capture the new position of the employee. This will be the position that the employee has been recruited into.
+
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/26.new-salary-and-difference.PNG" 
+     alt="new salary" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+	    
+The user is requested to capture the new salary of the employee. If the salary has decreased they will need to capture a salary that is less than the current salary. If the salary has been increased, they will need to capture a salary that is greater than the current salary. If the salary has remained the same, they will not have to recapture it. The difference will be calculated as 0.
+
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/27.placed-messages.PNG" 
+     alt="placed messages" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+	    
+The user will be thanked for capturing the placement. They will be provided with updates as the application goes through the process of  saving the new record to the placed candidates sheet, calculating the number of days within the pool, and updating the data within the redeployment pool.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/28.placed-employee.PNG" 
+     alt="placed employee sheet" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+            
+The employee record will be added to the placed employee worksheet within google sheets.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/29.redeployment-pool-updated.PNG" 
+     alt="redeployment pool employee placed update" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+	    
+The employee record within the redeployment pool worksheet will have the exit date added as the current date, the days within the pool will be calculated and added and the status will be updated as Placed.
+
+The user will be returned to the main menu.
+
+## Retrench Employee
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/30.retrench-employee.PNG" 
+     alt="retrench employee" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+	    
+When a user selects to retrench an employee, the employee menu will display for the user to select an employee from. Note that the employee Dale Jason, who was placed, no longer reflects on the menu as his status is no longer active.
+
+   <img src="" 
+     alt="retrench employee - updates" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+
+ The user will be informed that the application is calculating the retrenchment package.This is done by fetching the salary, the Tenure - years and months values from the redeployment pool worksheet. The following calculation is then performed. Tenure-years * Monthly Salary + (Tenure-months / 12 * Monthly Salary). They will be provided with updates as the application goes through the process of  saving the new record to the retrenched candidates sheet, calculating the number of days within the pool, and updating the data within the redeployment pool.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/32.retrench-employee-update-redeployment-pool.PNG" 
+     alt="retrenched employee sheet" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+            
+The employee record will be added to the retrenched employee worksheet within google sheets.
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/33.retrenched-employee.PNG" 
+     alt="redeployment pool employee retrenched update" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+	    
+The employee record within the redeployment pool worksheet will have the exit date added as the current date, the days within the pool will be calculated and added and the status will be updated as Retrenched.
+
+The user will be returned to the main menu.
+
+ ## Data Tables
+ 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/34.data-tables-menu.PNG" 
+     alt="data tables menu" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+	    
+When the user selects the option Data Tables they are taken to the above data table menu containing the various tables that can be displayed. It is very useful for the  user to be able to call the various tables to view the data, as it allows them to check updates to the redeployment pool, check calculations and have the data at hand, as per live capture, if questioned.
+
+Each option displays the relevant table as follows:
+
+Redeployment Pool Summary
+
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/35.redeployment-pool-summary.PNG" 
+     alt="redeployment pool summary" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+	    
+ Personal Details Summary
+ 
+ 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/36.personal-details-summary.PNG" 
+     alt="personal details summary" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+	    
+Department and Position
+
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/37.department-and-position.PNG" 
+     alt="department and position" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+	    
+ Placed employees
+ 
+ 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/38.placed-employees.PNG" 
+     alt="placed employees" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+            
+Salary Comparison
+
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/39.salary-comparison.PNG" 
+     alt="salary comparison" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+            
+Days within Pool
+
+
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/40.days-within-pool.PNG" 
+     alt="days within pool" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+            
+Salary and Tenure
+
+
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/41.salaries-and-tenure.PNG" 
+     alt="salary and tenure" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+            
+Retrenched Employees
+
+
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/42.retrenched-employees.PNG" 
+     alt="retrenched employees" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+            
+## Features Left to Implement
+
+The following features could potentially be implemented in future releases:
+1. Create a front-end application to display the data tables, as well as utilise the database to create charts displaying the various values, calculated differences, statistics etc. This would be an excellent reporting tool to track and report on the redeployment process.
+2. Create a front-end application to complete the redeployment process via. Instead of capture taking place within the command line, a front-end application, with user login and validation could be created to complete the process via.
+
+# Testing
+
+### Features Testing
+
+Please access the Redeployment Process testing pack to view full testing of the site features.
+
+<a href="h">Redeployment Pool testing pack</a>
+
+### Bugs and Issues
+
+
+### User Stories Testing
+
+
+### Code Validation
+
+
+
+### Deployment Testing
+
+
+
 
 # Deployment
 
