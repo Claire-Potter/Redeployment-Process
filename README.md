@@ -72,11 +72,12 @@ I have taken some time to answer the following high-level strategic questions:
  4. Is the technology appropriate?  
 	 
 	 The process is coded in Python. The database is setup in google sheets. The following libraries are used to provide the necessary functionality:
-	  gspread
-	  inquirer
-	  pandas
-	  datetime
-	  IPython.display
+	 - gspread
+	 - inquirer - changed to InquirerPy
+	 - prompt_toolkit - InquirerPy is dependent on this
+	 - pandas
+	 - datetime
+	 - Python.display
 	  
 	  Google cloud platform is utilised to create
 	  the API between the application and google sheets.
@@ -157,18 +158,26 @@ Please follow the below link to view the wireframes for the application:
 
  <a href="https://github.com/Claire-Potter/redeployment-process/tree/main/read-me-content/wireframes">Wireframes</a>
 
+## Design differences
+
+1. Due to issues with the library inquirer, the library InquirerPy was utilised as this uses the latest python version and readchar version. Functions were updated to use the InquirerPy library.
+2. An additional validation was included within the start date validation function to ensure that the date is less than today's date. This is to prevent errors when calculating number of days in pool, as the exit date is set as today's date.
+3. The employee number as the selector was changed to be the employee number, the employee name and the employee surname. This is to improve the user experience, as a user would be more familiar with an employee's name than their number. It also 'humanises' the process. It is a very sensitive process and it is important to always have the employee's interests at heart. By including their names, it ensures that the user capturing the data relates each action to a person, rather than working transactionally.
+4. All of the data tables were updated to display the name and surname of the employee. This was completed for the same reason as number 3.
+
 ## Surface
 
-As this application is written in Python and displays within the command line, design aspects were minimal and provided for within the Code Institute template.
+As this application is written in Python and displays within the command line, visual design aspects catered for through html and css were minimal and provided for within the Code Institute Python template.
 
 ## Technologies
 
 The process is coded in Python. The database is setup in google sheets. The following libraries are used to provide the necessary functionality:
-	  gspread
-	  inquirer
-	  pandas
-	  datetime
-	  IPython.display
+- gspread
+- inquirer - changed to InquirerPy
+- prompt_toolkit - InquirerPy is dependent on this
+- pandas
+- datetime
+- IPython.display
 	  
 Google cloud platform is utilised to create the API between the application and google sheets.
 
