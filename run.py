@@ -242,7 +242,7 @@ def validate_date(my_str_date):
     Raises:
         ValueError if string cannot be converted into a date and
         if it is in the incorrect format.
-        ValueError if the captured_date is greater than or equal to 
+        ValueError if the captured_date is greater than or equal to
         today's date.
     References:
         The following article was refernced to convert to date:
