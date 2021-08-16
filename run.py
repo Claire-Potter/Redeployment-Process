@@ -1,7 +1,7 @@
 # Import additional libraries to utilise functionality.
 import gspread
 from google.oauth2.service_account import Credentials
-from InquirerPy import inquirer, prompt
+from InquirerPy import prompt
 from datetime import datetime
 import pandas as pd
 from IPython.display import display
@@ -380,14 +380,14 @@ def select_employee():
     choices_list = retrieve_dataset("redeployment_pool", [3, 4, 5, 6, 7,
                                     8, 9, 10, 11, 12, 13])
     while True:
-        employee = [inquirer.List("employee",
-                                  message="Please select the "
-                                  "employee to update",
-                                  choices=choices_list,), ]
-        answers = inquirer.prompt(employee)
-        print(f"You have selected {answers} \n")
-        employee = answers["employee"]
-        emp_values = employee.split()
+        employee = [{"type": "list",
+                     "message": "Please select the "
+                     "employee to update",
+                     "choices": choices_list, }, ]
+        result = prompt(employee)
+        print(f"You have selected {result} \n")
+        emp_values_name = result[0]
+        emp_values = emp_values_name.split()
         emp_value = emp_values[0]
         break
 
@@ -413,15 +413,16 @@ def select_field():
                         headers[7], headers[8], headers[9],
                         headers[10]])
     while True:
-        heading_options = [inquirer.List("update_option",
-                                         message="Please select the "
-                                         "option to update",
-                                         choices=options_list,), ]
-        answers = inquirer.prompt(heading_options)
-        print(f"You have selected {answers} \n")
+        heading_options = [{"type": "list",
+                            "message": "Please select the "
+                            "option to update",
+                            "choices": options_list, }, ]
+        result = prompt(heading_options)
+        name = result[0]
+        print(f"You have selected {name} \n")
         break
 
-    return (answers["update_option"])
+    return (name)
 
 
 def update_another_field():
@@ -432,15 +433,16 @@ def update_another_field():
         answer as a string
     """
     while True:
-        yes_or_no = [inquirer.List("choice",
-                                   message="Would you like to "
-                                   "return to the update menu?",
-                                   choices=["Yes", "No"],), ]
-        answers = inquirer.prompt(yes_or_no)
-        print(f"You have selected {answers} \n")
+        yes_or_no = [{"type": "list",
+                      "message": "Would you like to "
+                      "return to the update menu?",
+                      "choices": ["Yes", "No"], }, ]
+        result = prompt(yes_or_no)
+        name = result[0]
+        print(f"You have selected {name} \n")
         break
 
-    return (answers["choice"])
+    return (name)
 
 
 def update_field():
@@ -713,21 +715,22 @@ def place_candidate():
     headers = data.pop(0)
     df = pd.DataFrame(data, columns=headers)
     df2 = df.set_index("Employee Number", drop=False)
-    name = df2.loc[emp_value, "Name"]
+    name_emp = df2.loc[emp_value, "Name"]
     surname = df2.loc[emp_value, "Surname"]
     print("Has there been a change in monthly salary?\n")
 
     while True:
-        change_in_salary = [inquirer.List("salary_change",
-                                          message="Please select the "
-                                          "relevant option",
-                                          choices=["Decrease",
-                                                   "Remains the Same",
-                                                   "Increase"],), ]
-        answers = inquirer.prompt(change_in_salary)
-        print(f"You have selected {answers} \n")
+        change_in_salary = [{"type": "list",
+                            "message": "Please select the "
+                                       "relevant option",
+                             "choices": ["Decrease",
+                                         "Remains the Same",
+                                         "Increase"], }, ]
+        result = prompt(change_in_salary)
+        name = result[0]
+        print(f"You have selected {name} \n")
         break
-    salary_update = (answers["salary_change"])
+    salary_update = (name)
     department_position = choose_department_position()
     department = department_position[0]
     position = department_position[1]
@@ -742,7 +745,7 @@ def place_candidate():
                           range_value, salary_range)
         print(f"The new salary has been captured as {paid}.")
         print("Calculating difference in salary")
-        difference = (int(paid) - current_salary)
+        difference = (paid - current_salary)
         status = ("Decreased")
     elif salary_update == "Remains the Same":
         print(f"The current employee salary is: {current_salary}."
@@ -762,7 +765,7 @@ def place_candidate():
         difference = (paid - current_salary)
         status = ("Increased")
     print("Thank you for capturing the placement.")
-    placed_employee = [emp_value, name, surname, department, position,
+    placed_employee = [emp_value, name_emp, surname, department, position,
                        current_salary, paid, difference, status]
 
     update_sheet(placed_employee, "placed_employees")
@@ -1028,21 +1031,22 @@ def red_pool_tables():
     based on the report selected to display within terminal.
     """
     while True:
-        tables_select = [inquirer.List("tables",
-                                       message="Please select the table you"
-                                               " wish to view",
-                                       choices=["Redeployment Pool Summary",
-                                                "Personal Details Summary",
-                                                "Department and Position",
-                                                "Placed Employees",
-                                                "Salary Comparison",
-                                                "Days within Pool",
-                                                "Salary and Tenure",
-                                                "Retrenched Employees",
-                                                "Return to Main Menu"],), ]
-        answers = inquirer.prompt(tables_select)
+        tables_select = [{"type": "list",
+                          "message": "Please select the table you"
+                                     " wish to view",
+                          "choices": ["Redeployment Pool Summary",
+                                      "Personal Details Summary",
+                                      "Department and Position",
+                                      "Placed Employees",
+                                      "Salary Comparison",
+                                      "Days within Pool",
+                                      "Salary and Tenure",
+                                      "Retrenched Employees",
+                                      "Return to Main Menu"], }, ]
+        result = prompt(tables_select)
+        name = result[0]
         break
-    selection = answers["tables"]
+    selection = name
     if selection == "Redeployment Pool Summary":
         summary_report()
     elif selection == "Personal Details Summary":
@@ -1074,17 +1078,18 @@ def main():
     based on the action selected.
     """
     while True:
-        questions = [inquirer.List("options",
-                     message="Please select an action",
-                                   choices=["Add a new candidate",
-                                            "Update candidate details",
-                                            "Place a candidate", "Retrench"
-                                            " a candidate",
-                                            "Data Tables",
-                                            "Exit the process"]), ]
-        answers = inquirer.prompt(questions)
+        questions = [{"type": "list",
+                     "message": "Please select an action",
+                      "choices": ["Add a new candidate",
+                                  "Update candidate details",
+                                  "Place a candidate", "Retrench"
+                                  " a candidate",
+                                  "Data Tables",
+                                  "Exit the process"], }, ]
+        result = prompt(questions)
+        name = result[0]
         break
-    selection = answers["options"]
+    selection = name
     if selection == "Add a new candidate":
         return add_candidate()
     elif selection == "Update candidate details":
@@ -1101,4 +1106,4 @@ def main():
 
 print("  \n")
 print("Welcome to the capture screen for the Redeployment Process.\n")
-get_gender()
+main()
