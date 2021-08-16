@@ -2,7 +2,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from InquirerPy import inquirer, prompt
-import inquirer
 from datetime import datetime
 import pandas as pd
 from IPython.display import display
