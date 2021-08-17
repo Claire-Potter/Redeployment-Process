@@ -1035,7 +1035,7 @@ def retrenched_report():
     """
     print("The below table displays the")
     print("retrenched employees.")
-    print("These retrenchment package")
+    print("The retrenchment package")
     print("calculation is (Salary * Tenure(years)) + (Salary * Months/12).\n")
 
     display_redeployment_pool("retrenched_employees", "Package",
