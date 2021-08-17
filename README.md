@@ -747,7 +747,7 @@ The following features could potentially be implemented in future releases:
 
 ## Main Menu
 
-<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/02.main-menu.PNG" 
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/00.main-menu.PNG" 
      alt="main menu" 
      style="display:block; 
             float:none; 
@@ -780,7 +780,7 @@ The following features could potentially be implemented in future releases:
  2. The user is able to capture their input: PASS
  3. The validation to ensure that the employee number is numeric runs correctly and displays as error message: PASS
 
-<img src="" 
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/01.non-numeric-entry.PNG" 
      alt="non-numeric" 
      style="display:block; 
             float:none; 
@@ -790,7 +790,7 @@ The following features could potentially be implemented in future releases:
 	    
  4. The validation to ensure that the employee number contains exactly six digits runs correctly and displays as error message: PASS
 
-<img src="" 
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/02.longer-than-6-digits.png" 
      alt="six-digits" 
      style="display:block; 
             float:none; 
@@ -798,7 +798,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
 	    
-<img src="" 
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/03.shorter-than-6-digits.PNG" 
      alt="shorter -six-digits" 
      style="display:block; 
             float:none; 
@@ -808,7 +808,7 @@ The following features could potentially be implemented in future releases:
 	    
 5. The  validation to ensure that the employee number is unique runs correctly and displays as error message: PASS
 
-<img src="" 
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/04.unique-employee-number.PNG" 
      alt="employee number unique" 
      style="display:block; 
             float:none; 
@@ -819,7 +819,7 @@ The following features could potentially be implemented in future releases:
 
  6.The employee number is added a s a string to the sheet: PASS
  
- <img src="" 
+ <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/05.employee-number-as-string.PNG" 
      alt="employee number string" 
      style="display:block; 
             float:none; 
@@ -839,7 +839,7 @@ The following features could potentially be implemented in future releases:
             
 8. The data cannot be numeric. An appropriate error message will display: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/06.first-name-no-numbers.PNG" 
      alt="Add Employee - Name numeric" 
      style="display:block; 
             float:none; 
@@ -849,7 +849,7 @@ The following features could potentially be implemented in future releases:
 
 9. It does allow special characters as often names contain a dash -, a space, or pronunciation emphasis characters: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/07.name-allows-characters.PNG" 
      alt="Add Employee - name characters" 
      style="display:block; 
             float:none; 
@@ -859,7 +859,7 @@ The following features could potentially be implemented in future releases:
 
 10. When the first name is captured, the first letter of the name will be capitalised by the application and it will be saved as a string: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/08.first-name-capitalised.PNG" 
      alt="Capitalised and string" 
      style="display:block; 
             float:none; 
@@ -881,7 +881,7 @@ The following features could potentially be implemented in future releases:
             
 12. The data cannot be numeric. An appropriate error message will display: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/09.surname-no-numbers.PNG" 
      alt="Add Employee - Surname numeric" 
      style="display:block; 
             float:none; 
@@ -891,7 +891,7 @@ The following features could potentially be implemented in future releases:
 
 13. It does allow special characters as often names contain a dash -, a space, or pronunciation emphasis characters: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/10.surname-allows-characters.PNG" 
      alt="Add Employee - Surname characters" 
      style="display:block; 
             float:none; 
@@ -901,7 +901,7 @@ The following features could potentially be implemented in future releases:
 
 14. When the surname is captured, the first letter of the name will be capitalised by the application and it will be saved as a string: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/11.surname-capitalised.PNG" 
      alt="Capitalised and string" 
      style="display:block; 
             float:none; 
@@ -921,7 +921,7 @@ The following features could potentially be implemented in future releases:
             
 16. The user is provided with an age range of 18 - 75 and they need to enter an age within this range. If they capture a value less than the minimum age it will fail and provide an error message: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/12.age-younger.PNG" 
      alt="Add Employee - Age younger" 
      style="display:block; 
             float:none; 
@@ -931,7 +931,7 @@ The following features could potentially be implemented in future releases:
 	    
 17. If they capture a value greater than the maximum age it will fail and provide an error message: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/13.age-older.PNG" 
      alt="Add Employee - Age older" 
      style="display:block; 
             float:none; 
@@ -941,7 +941,7 @@ The following features could potentially be implemented in future releases:
 	    
 18. If they capture a non-numeric value it will fail and provide an error message: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/14.age-non-numeric.PNG" 
      alt="Add Employee - Age non-numeric" 
      style="display:block; 
             float:none; 
@@ -951,7 +951,7 @@ The following features could potentially be implemented in future releases:
 	    
 19. The age field is converted to an integer and saved correctly to the sheet: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/15.age-integer-saved.PNG" 
      alt="Add Employee - Age saved" 
      style="display:block; 
             float:none; 
@@ -973,7 +973,7 @@ The following features could potentially be implemented in future releases:
 
 23.  The gender field is saved as a string to the sheet: PASS
  
-   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/08.gender.PNG" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/16.gender-string.PNG" 
      alt="Add Employee - Gender - string" 
      style="display:block; 
             float:none; 
@@ -996,7 +996,7 @@ The following features could potentially be implemented in future releases:
 
 26. the first letter of the department will be capitalised by the application and it will be saved as a string: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/17.department-as-string.PNG" 
      alt="Add Employee - Department as string" 
      style="display:block; 
             float:none; 
@@ -1018,7 +1018,7 @@ The following features could potentially be implemented in future releases:
 
 29. the first letter of the position will be capitalised by the application and it will be saved as a string: PASS
 
-  <img src="" 
+  <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/18.position-string.PNG" 
      alt="Add Employee - Position-string" 
      style="display:block; 
             float:none; 
@@ -1038,7 +1038,7 @@ The following features could potentially be implemented in future releases:
             
  31.The user is provided with a salary range of 100 - 100 000 and they need to enter a salary within this range. If the salary is too low it  will display an error: PASS
  
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/20.salary-too-low.PNG" 
      alt="Add Employee - Salary low" 
      style="display:block; 
             float:none; 
@@ -1048,7 +1048,7 @@ The following features could potentially be implemented in future releases:
 	    
  32.If the salary is too high it  will display an error: PASS
  
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/19.salary-too-high.PNG"
      alt="Add Employee - Salary high" 
      style="display:block; 
             float:none; 
@@ -1058,7 +1058,7 @@ The following features could potentially be implemented in future releases:
  
 33. The validation function will ensure that the data is numeric, the below example, a space has been added, if non-numeric it will fail: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/21.salary-with-space.PNG" 
      alt="Add Employee - Salary non-numeric" 
      style="display:block; 
             float:none; 
@@ -1068,7 +1068,7 @@ The following features could potentially be implemented in future releases:
  
 34. The salary field is converted to an integer and saved: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/22.salary-as-integer.PNG" 
      alt="Add Employee - Salary integer saved" 
      style="display:block; 
             float:none; 
@@ -1088,7 +1088,7 @@ The following features could potentially be implemented in future releases:
             
 36. The user is provided with a  range of 1 - 50 and they need to enter a number within this range. If the number is too low it will fail: PASS
 
-  <img src="" 
+  <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/23.years-too-low.PNG" 
      alt="Add Employee - Tenure - years too low" 
      style="display:block; 
             float:none; 
@@ -1098,7 +1098,7 @@ The following features could potentially be implemented in future releases:
 
 38.  The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur such as if it is too high: PASS
 
-  <img src="" 
+  <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/24.years-too-high.PNG" 
      alt="Add Employee - Tenure - years too high" 
      style="display:block; 
             float:none; 
@@ -1120,7 +1120,7 @@ The following features could potentially be implemented in future releases:
             
 41.The user is provided with a  range of 1 - 11 and they need to enter a number within this range. If the number is too low it will fail: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/25.months-too-low.PNG" 
      alt="Add Employee - Tenure - months low" 
      style="display:block; 
             float:none; 
@@ -1131,7 +1131,7 @@ The following features could potentially be implemented in future releases:
 
 42. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occursuch as if it is too high: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/26.months-too-high.PNG" 
      alt="Add Employee - Tenure - months high" 
      style="display:block; 
             float:none; 
@@ -1153,7 +1153,7 @@ The following features could potentially be implemented in future releases:
             
  46. The date is validated to ensure it is captured in the format dd/mm/yyyy: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/27.incorrect-date-format.PNG" 
      alt="Add Employee - Start Date incorrect" 
      style="display:block; 
             float:none; 
@@ -1163,7 +1163,7 @@ The following features could potentially be implemented in future releases:
  
  47. An additional validation is in place to ensure that the date is less than today's date: PASS
  
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/28.incorrect-too-great-date.PNG" 
      alt="Add Employee - Start Date greater than today" 
      style="display:block; 
             float:none; 
@@ -1173,7 +1173,7 @@ The following features could potentially be implemented in future releases:
 	    
 48. The date is saved correctly to the sheet: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/29.saved-correctly-to-sheets.PNG" 
      alt="Add Employee - Start Dat saved correctly" 
      style="display:block; 
             float:none; 
@@ -1183,7 +1183,7 @@ The following features could potentially be implemented in future releases:
 
 49. The employee record is saved as a row to the end of the correct worksheet - redeployment_pool. All of the data matches up to the correct column: PASS
 
-   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/16.data-added-to-worksheet.PNG" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/30.employee-record-saved.PNG" 
      alt="Add Employee - added to sheet" 
      style="display:block; 
             float:none; 
@@ -1208,7 +1208,7 @@ The following features could potentially be implemented in future releases:
 
 3. The user can then select the relevant employee to update: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/31.select-an-employee.PNG" 
      alt="select employee" 
      style="display:block; 
             float:none; 
@@ -1266,7 +1266,7 @@ The following features could potentially be implemented in future releases:
 
 3. The user can then select the relevant employee to place: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/31.select-an-employee.PNG" 
      alt="select employee" 
      style="display:block; 
             float:none; 
@@ -1309,7 +1309,7 @@ The following features could potentially be implemented in future releases:
 	    
 8.The user is requested to capture the new salary of the employee. If the salary has decreased they will need to capture a salary that is less than the current salary: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/32.placed-salary-decrease.PNG" 
      alt="salary decrease" 
      style="display:block; 
             float:none; 
@@ -1319,7 +1319,7 @@ The following features could potentially be implemented in future releases:
 	    
 9. If the salary has been increased, they will need to capture a salary that is greater than the current salary: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/33.placed-salary-increase.PNG" 
      alt="salary increase" 
      style="display:block; 
             float:none; 
@@ -1330,7 +1330,7 @@ The following features could potentially be implemented in future releases:
 11. If the salary has remained the same, they will not have to recapture it. The difference will be calculated as 0: PASS
 
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/34.placed-salary-the-same.PNG" 
      alt="salary the same" 
      style="display:block; 
             float:none; 
@@ -1388,7 +1388,7 @@ The following features could potentially be implemented in future releases:
 
 3. The user can then select the relevant employee to place: PASS
 
-   <img src="" 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/31.select-an-employee.PNG" 
      alt="select employee" 
      style="display:block; 
             float:none; 
@@ -1540,7 +1540,7 @@ The following features could potentially be implemented in future releases:
 
 1. An issue was experienced with the start date field. If I converted the value to a date within the function, it could not be returned to the sheet, a json serializable error would occur:
 
-<img src="" 
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/json-serializable-error.PNG" 
      alt="json serializable error" 
      style="display:block; 
             float:none; 
@@ -1584,8 +1584,8 @@ The following features could potentially be implemented in future releases:
 
 The run.py file passed through pep-8 online successfully:
 
-<img src="" 
-     alt="json serializable error" 
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/pep8-online.PNG" 
+     alt="pep-8 online pass" 
      style="display:block; 
             float:none; 
             margin-left:auto; 
@@ -1594,7 +1594,7 @@ The run.py file passed through pep-8 online successfully:
 
 Pycodestyle ran within the console returned no errors:
 
-<img src="" 
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/pycodestyle-no-errors.PNG" 
      alt="pycodestyle validation" 
      style="display:block; 
             float:none; 
