@@ -817,7 +817,7 @@ The following features could potentially be implemented in future releases:
             "> 
 
 
- 6.The employee number is added a s a string to the sheet: PASS
+ 6. The employee number is added a s a string to the sheet: PASS
  
  <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/05.employee-number-as-string.PNG" 
      alt="employee number string" 
@@ -971,7 +971,7 @@ The following features could potentially be implemented in future releases:
             
 21. Validations are not required as the data is already provided for the user to choose from. The user can select an option and proceed: PASS
 
-23.  The gender field is saved as a string to the sheet: PASS
+22.  The gender field is saved as a string to the sheet: PASS
  
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/16.gender-string.PNG" 
      alt="Add Employee - Gender - string" 
@@ -981,7 +981,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             ">
 
-24. The Department field is utilised to capture the business department of the employee. It displays correctly, without errors or spelling mistakes: PASS
+23. The Department field is utilised to capture the business department of the employee. It displays correctly, without errors or spelling mistakes: PASS
 
  
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/09.department.PNG" 
@@ -992,9 +992,9 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
            
-25. The same function used to validate the text fields - first name and surname is utilised again here, a numeric value cannot be captured: PASS
+24. The same function used to validate the text fields - first name and surname is utilised again here, a numeric value cannot be captured: PASS
 
-26. the first letter of the department will be capitalised by the application and it will be saved as a string: PASS
+25. the first letter of the department will be capitalised by the application and it will be saved as a string: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/17.department-as-string.PNG" 
      alt="Add Employee - Department as string" 
@@ -1004,7 +1004,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
 
-27. The Position field is utilised to capture the current position filled by the employee. It displays correctly, with no errors or spelling mistakes: PASS
+26. The Position field is utilised to capture the current position filled by the employee. It displays correctly, with no errors or spelling mistakes: PASS
 
   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/10.position.PNG" 
      alt="Add Employee - Position" 
@@ -1014,9 +1014,9 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
             
-28. The same function used to validate text fields is utilised again here, a numeric value won't be accepted: PASS
+27. The same function used to validate text fields is utilised again here, a numeric value won't be accepted: PASS
 
-29. the first letter of the position will be capitalised by the application and it will be saved as a string: PASS
+28. the first letter of the position will be capitalised by the application and it will be saved as a string: PASS
 
   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/18.position-string.PNG" 
      alt="Add Employee - Position-string" 
@@ -1026,7 +1026,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
 
-30. The salary field is utilised to capture the current salary of the employee. It displays correctly, without errors or spelling mistakes: PASS
+29. The salary field is utilised to capture the current salary of the employee. It displays correctly, without errors or spelling mistakes: PASS
  
   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/11.salary.PNG" 
      alt="Add Employee - Salary" 
@@ -1036,7 +1036,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
             
- 31.The user is provided with a salary range of 100 - 100 000 and they need to enter a salary within this range. If the salary is too low it  will display an error: PASS
+ 30. The user is provided with a salary range of 100 - 100 000 and they need to enter a salary within this range. If the salary is too low it  will display an error: PASS
  
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/20.salary-too-low.PNG" 
      alt="Add Employee - Salary low" 
@@ -1046,7 +1046,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
 	    
- 32.If the salary is too high it  will display an error: PASS
+ 31. If the salary is too high it  will display an error: PASS
  
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/19.salary-too-high.PNG"
      alt="Add Employee - Salary high" 
@@ -1056,7 +1056,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
  
-33. The validation function will ensure that the data is numeric, the below example, a space has been added, if non-numeric it will fail: PASS
+32. The validation function will ensure that the data is numeric, the below example, a space has been added, if non-numeric it will fail: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/21.salary-with-space.PNG" 
      alt="Add Employee - Salary non-numeric" 
@@ -1066,7 +1066,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
  
-34. The salary field is converted to an integer and saved: PASS
+33. The salary field is converted to an integer and saved: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/22.salary-as-integer.PNG" 
      alt="Add Employee - Salary integer saved" 
@@ -1076,7 +1076,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
 
-35. The years of service field is utilised to capture the number of years of service of the employee. It displays correctly without errors or spelling errors: PASS
+34. The years of service field is utilised to capture the number of years of service of the employee. It displays correctly without errors or spelling errors: PASS
  
   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/12.tenure-years.PNG" 
      alt="Add Employee - Tenure - years" 
@@ -1086,7 +1086,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
             
-36. The user is provided with a  range of 1 - 50 and they need to enter a number within this range. If the number is too low it will fail: PASS
+35. The user is provided with a  range of 1 - 50 and they need to enter a number within this range. If the number is too low it will fail: PASS
 
   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/23.years-too-low.PNG" 
      alt="Add Employee - Tenure - years too low" 
@@ -1096,7 +1096,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
 
-38.  The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur such as if it is too high: PASS
+36.  The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur such as if it is too high: PASS
 
   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/24.years-too-high.PNG" 
      alt="Add Employee - Tenure - years too high" 
@@ -1106,9 +1106,9 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
 
-39.  The years of service field is converted to an integer and saved: PASS
+37.  The years of service field is converted to an integer and saved: PASS
 
-40.  The months of service field is utilised to capture the number of months of service of the employee. It displays correctly, without errors or spelling mistakes: PASS
+38.  The months of service field is utilised to capture the number of months of service of the employee. It displays correctly, without errors or spelling mistakes: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/13.tenure-months.PNG" 
      alt="Add Employee - Tenure - months" 
@@ -1118,7 +1118,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
             
-41.The user is provided with a  range of 1 - 11 and they need to enter a number within this range. If the number is too low it will fail: PASS
+39.The user is provided with a  range of 1 - 11 and they need to enter a number within this range. If the number is too low it will fail: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/25.months-too-low.PNG" 
      alt="Add Employee - Tenure - months low" 
@@ -1129,7 +1129,7 @@ The following features could potentially be implemented in future releases:
             "> 
 
 
-42. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occursuch as if it is too high: PASS
+40. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occursuch as if it is too high: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/26.months-too-high.PNG" 
      alt="Add Employee - Tenure - months high" 
@@ -1139,9 +1139,9 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
 	    
-44.  The months of service field is converted to an integer and saved: PASS
+41.  The months of service field is converted to an integer and saved: PASS
 
-45. The start date / entry date field is utilised to capture the start date that the employee is added to the redeployment pool / begins the redeployment process. It displays correctly with no errors or spelling mistakes: PASS 
+42. The start date / entry date field is utilised to capture the start date that the employee is added to the redeployment pool / begins the redeployment process. It displays correctly with no errors or spelling mistakes: PASS 
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/14.start-date.PNG" 
      alt="Add Employee - Start Date" 
@@ -1151,7 +1151,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
             
- 46. The date is validated to ensure it is captured in the format dd/mm/yyyy: PASS
+ 43. The date is validated to ensure it is captured in the format dd/mm/yyyy: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/27.incorrect-date-format.PNG" 
      alt="Add Employee - Start Date incorrect" 
@@ -1161,7 +1161,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
  
- 47. An additional validation is in place to ensure that the date is less than today's date: PASS
+ 44. An additional validation is in place to ensure that the date is less than today's date: PASS
  
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/28.incorrect-too-great-date.PNG" 
      alt="Add Employee - Start Date greater than today" 
@@ -1171,7 +1171,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             ">
 	    
-48. The date is saved correctly to the sheet: PASS
+45. The date is saved correctly to the sheet: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/29.saved-correctly-to-sheets.PNG" 
      alt="Add Employee - Start Dat saved correctly" 
@@ -1181,7 +1181,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             ">
 
-49. The employee record is saved as a row to the end of the correct worksheet - redeployment_pool. All of the data matches up to the correct column: PASS
+46. The employee record is saved as a row to the end of the correct worksheet - redeployment_pool. All of the data matches up to the correct column: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/30.employee-record-saved.PNG" 
      alt="Add Employee - added to sheet" 
@@ -1191,7 +1191,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             ">
 	    
-50. The user will be returned to the main menu: PASS
+47. The user will be returned to the main menu: PASS
 
 ## Update Employee
 
@@ -1262,6 +1262,7 @@ The following features could potentially be implemented in future releases:
             margin-left:auto; 
             margin-right:auto;
             "> 
+	    
 2. It does not display the placed or retrenched employees: PASS
 
 3. The user can then select the relevant employee to place: PASS
@@ -1307,7 +1308,7 @@ The following features could potentially be implemented in future releases:
             ">
 	    
 	    
-8.The user is requested to capture the new salary of the employee. If the salary has decreased they will need to capture a salary that is less than the current salary: PASS
+8. The user is requested to capture the new salary of the employee. If the salary has decreased they will need to capture a salary that is less than the current salary: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/32.placed-salary-decrease.PNG" 
      alt="salary decrease" 
@@ -1327,7 +1328,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             ">
 	    
-11. If the salary has remained the same, they will not have to recapture it. The difference will be calculated as 0: PASS
+10. If the salary has remained the same, they will not have to recapture it. The difference will be calculated as 0: PASS
 
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/testing/34.placed-salary-the-same.PNG" 
@@ -1337,11 +1338,12 @@ The following features could potentially be implemented in future releases:
             margin-left:auto; 
             margin-right:auto;
             ">
-12. The difference between the salaries is calculated correctly: PASS
 	    
-13. The user will be thanked for capturing the placement. They will be provided with updates as the application goes through the process of  saving the new record to the placed employees sheet: PASS
-14. The days within the pool are calculated correctly: PASS
-15. The status is captured add Placed and the record is updated within the redeployment pool sheet: PASS
+11. The difference between the salaries is calculated correctly: PASS
+	    
+12. The user will be thanked for capturing the placement. They will be provided with updates as the application goes through the process of  saving the new record to the placed employees sheet: PASS
+13. The days within the pool are calculated correctly: PASS
+14. The status is captured as Placed and the record is updated within the redeployment pool sheet: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/27.placed-messages.PNG" 
      alt="placed messages" 
@@ -1351,7 +1353,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             ">
 	    
-16. The employee record will be added as a row to the placed employee worksheet within google sheets. The data will align with the columns in the sheet: PASS
+15. The employee record will be added as a row to the placed employee worksheet within google sheets. The data will align with the columns in the sheet: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/28.placed-employee.PNG" 
      alt="placed employee sheet" 
@@ -1361,7 +1363,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             ">
             
-17. The employee record within the redeployment pool worksheet will have the exit date added as the current date, the days within the pool will be calculated and added and the status will be updated as Placed: PASS
+16. The employee record within the redeployment pool worksheet will have the exit date added as the current date, the days within the pool will be calculated and added and the status will be updated as Placed: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/29.redeployment-pool-updated.PNG" 
      alt="redeployment pool employee placed update" 
@@ -1371,7 +1373,7 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             ">
 	       
-18. The user will be returned to the main menu: PASS
+17. The user will be returned to the main menu: PASS
 
 ## Retrench Employee
 
@@ -1384,6 +1386,7 @@ The following features could potentially be implemented in future releases:
             margin-left:auto; 
             margin-right:auto;
             ">
+	    
 2. It does not display the placed or retrenched employees: PASS
 
 3. The user can then select the relevant employee to place: PASS
@@ -1555,30 +1558,101 @@ The following features could potentially be implemented in future releases:
 
 ### User Stories Testing
 
-1. The user is a person who works within the HR job family who is required to maintain the redeployment pool: PASS - the application utilises common practice phrases, naming conventions and a process that would be familiar to an HR professional.
-2. The user will need to select between various actions in order to proceed: PASS - the main menu provides the user with the various actions to select between.
-3. The first action should be to add a new employee to the redeployment pool: PASS - this is the first action available on the list.
-4. The user should be required to input or select the various data required to add an employee: PASS - the action calls all the relevant functions to update the required data fields.
-5. All data captured should pass the specific validations in place to ensure accuracy: PASS - all of the data fields have validations in place, unless the value is selected from a set list of values.
-6. Once all fields are captured, the data should be consolidated into one list and saved to the redeployment pool database found in google sheets: PASS - the data is consolidated and saved as a row to the worksheet.
-7. The second action available should be to update the data of an employee within the redeployment pool: PASS - this is the second action available on the main menu.
-8. The user should be able to select the employee through the employee number as the unique identifier: PASS - the employee number is provided as the main identifier, the user experience is further enhanced as the first name and surname is also provided.
-9. If the employee is no longer active within the redeployment pool, the user should not be able to select them: PASS - placed or retrenched employees do not appear on the employee selection list.
-10. The user should be able to select which field they wish to update: PASS - the user is presented with all data fields as options within a list which they can select from.
-11. Once the field is selected, the necessary function to update the data should run: PASS - all of the fields call the correct function to update the value.
-12. The user should be given the option to update another field or to return to the main menu: PASS - once the update has been saved, the user is asked whether they would like to perform another update or to return to the main menu.
-13. The next action the user should be able to perform is to place an employee: PASS - placing an employee is the third option available within the main menu.
-14. The place action should allow the user to place an employee within a new position in a new department: PASS -the function includes the selection of a new department and a new position for the employee.
-15. The user should be able to select whether the employee received a change in salary or not: PASS - the user can select if there was a decrease, an increase or if the salary remained the same.
-16. The difference between old salary and new salary should be calculated: PASS - this is calculated and added as a new field called Difference.
-17. All data captured should be consolidated and added to the placed employees sheet within the workbook: PASS - the data is added as a new row to the worksheet.
-18. The relevant fields within the redeployment pool should be updated with the new data: PASS - only the affected fields are updated within the redeployment pool sheet.
-19. The user should be able to action a retrenchment: PASS - this is the fourth option within the main menu.
-20. The user should be able to select an employee from within the redeployment pool to retrench: PASS - the first function called is to select an employee.
-21. This employee cannot have the status placed or retrenched already: PASS - the employee list only contains active employees.
-22. Once the employee is selected, the retrenchment package should be calculated utilising information from within the redeployment pool: PASS - the salary and tenure information is fetched from the redeployment pool sheet and utilised to calculate the package.
-23. The data should be consolidated and saved to the retrenched employees sheet within the workbook: PASS - the data is consolidated and added as a new row to the retrenched employees worksheet.
-24. The user should be able to view the data available in google sheets via the command-line application: PASS - various data tables are available to the user to view the data.
+1. The user is a person who works within the HR job family who is required to maintain the redeployment pool: 
+
+    PASS - the application utilises common practice phrases, naming conventions and a process that would be familiar to an HR professional.
+    
+2. The user will need to select between various actions in order to proceed:
+
+   PASS - the main menu provides the user with the various actions to select between.
+   
+3. The first action should be to add a new employee to the redeployment pool:
+
+    PASS - this is the first action available on the list.
+    
+4. The user should be required to input or select the various data required to add an employee:
+
+   PASS - the action calls all the relevant functions to update the required data fields.
+   
+5. All data captured should pass the specific validations in place to ensure accuracy: 
+
+   PASS - all of the data fields have validations in place, unless the value is selected from a set list of values.
+
+6. Once all fields are captured, the data should be consolidated into one list and saved to the redeployment pool database found in google sheets:
+
+    PASS - the data is consolidated and saved as a row to the worksheet.
+    
+7. The second action available should be to update the data of an employee within the redeployment pool: 
+ 
+   PASS - this is the second action available on the main menu.
+  
+8. The user should be able to select the employee through the employee number as the unique identifier: 
+
+    PASS - the employee number is provided as the main identifier, the user experience is further enhanced as the first name and surname is also provided.
+    
+9. If the employee is no longer active within the redeployment pool, the user should not be able to select them:
+
+    PASS - placed or retrenched employees do not appear on the employee selection list.
+    
+10. The user should be able to select which field they wish to update:
+
+    PASS - the user is presented with all data fields as options within a list which they can select from.
+ 
+11. Once the field is selected, the necessary function to update the data should run:
+
+    PASS - all of the fields call the correct function to update the value.
+ 
+12. The user should be given the option to update another field or to return to the main menu: 
+
+    PASS - once the update has been saved, the user is asked whether they would like to perform another update or to return to the main menu.
+
+13. The next action the user should be able to perform is to place an employee: 
+
+    PASS - placing an employee is the third option available within the main menu.
+
+14. The place action should allow the user to place an employee within a new position in a new department: 
+
+    PASS -the function includes the selection of a new department and a new position for the employee.
+
+15. The user should be able to select whether the employee received a change in salary or not:
+
+     PASS - the user can select if there was a decrease, an increase or if the salary remained the same.
+   
+16. The difference between old salary and new salary should be calculated: 
+
+    PASS - this is calculated and added as a new field called Difference.
+
+17. All data captured should be consolidated and added to the placed employees sheet within the workbook:
+
+    PASS - the data is added as a new row to the worksheet.
+  
+18. The relevant fields within the redeployment pool should be updated with the new data:
+
+     PASS - only the affected fields are updated within the redeployment pool sheet.
+ 
+19. The user should be able to action a retrenchment: 
+
+    PASS - this is the fourth option within the main menu.
+ 
+20. The user should be able to select an employee from within the redeployment pool to retrench: 
+
+    PASS - the first function called is to select an employee.
+ 
+21. This employee cannot have the status placed or retrenched already:
+
+     PASS - the employee list only contains active employees.
+ 
+22. Once the employee is selected, the retrenchment package should be calculated utilising information from within the redeployment pool:
+
+     PASS - the salary and tenure information is fetched from the redeployment pool sheet and utilised to calculate the package.
+   
+23. The data should be consolidated and saved to the retrenched employees sheet within the workbook: 
+
+    PASS - the data is consolidated and added as a new row to the retrenched employees worksheet.
+
+24. The user should be able to view the data available in google sheets via the command-line application:
+
+    PASS - various data tables are available to the user to view the data.
 
 ### Code Validation
 
