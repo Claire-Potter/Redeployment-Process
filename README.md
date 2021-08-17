@@ -73,13 +73,13 @@ Please follow the below link to view the redeployment process:
 14. The place action should allow the user to place an employee within a new position in a new department.
 15. The user should be able to select whether the employee received a change in salary or not.
 16. The difference between old salary and new salary should be calculated.
-17. All data captured should be consolidated and added to the placed candidates sheet within the workbook.
+17. All data captured should be consolidated and added to the placed employees sheet within the workbook.
 18. The relevant fields within the redeployment pool should be updated with the new data.
 19. The user should be able to action a retrenchment.
 20. The user should be able to select an employee from within the redeployment pool to retrench.
 21. This employee cannot have the status placed or retrenched already.
 22. Once the employee is selected, the retrenchment package should be calculated utilising information from within the redeployment pool.
-23. The data should be consolidated and saved to the retrenched candidates sheet within the workbook.
+23. The data should be consolidated and saved to the retrenched employees sheet within the workbook.
 24. The user should be able to view the data available in google sheets via the command-line application.
 
 
@@ -174,7 +174,7 @@ This site will be developed as a minimum viable product. Future releases could i
 11. Save all data captured to the correct sheet within google sheets.
 12. Return the correct data when required to the command-line.
 13. Summarised versions of the data tables should be displayed in the command line when called.
-14. The difference in salaries for placed candidates should be calculated.
+14. The difference in salaries for placed employees should be calculated.
 15. The days within the pool figure should be calculated.
 16. The retrenchment package should be calculated.
 
@@ -380,7 +380,7 @@ The Position field is utilised to capture the current position filled by the emp
             margin-right:auto;
             "> 
             
-The salary field is utilised to capture the current salary of the employee. The user is provided with a salary range of 100 - 100 000 and they need to enter a salary within this range. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur. The age field is converted to an integer and saved.
+The salary field is utilised to capture the current salary of the employee. The user is provided with a salary range of 100 - 100 000 and they need to enter a salary within this range. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur. The salary is converted to an integer and saved.
 
 
  
@@ -558,7 +558,7 @@ The user is requested to capture the new salary of the employee. If the salary h
             ">
 	    
 	    
-The user will be thanked for capturing the placement. They will be provided with updates as the application goes through the process of  saving the new record to the placed candidates sheet, calculating the number of days within the pool, and updating the data within the redeployment pool.
+The user will be thanked for capturing the placement. They will be provided with updates as the application goes through the process of  saving the new record to the placed employees sheet, calculating the number of days within the pool, and updating the data within the redeployment pool.
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/28.placed-employee.PNG" 
      alt="placed employee sheet" 
@@ -604,7 +604,7 @@ When a user selects to retrench an employee, the employee menu will display for 
             margin-right:auto;
             ">
 
- The user will be informed that the application is calculating the retrenchment package.This is done by fetching the salary, the Tenure - years and months values from the redeployment pool worksheet. The following calculation is then performed. Tenure-years * Monthly Salary + (Tenure-months / 12 * Monthly Salary). They will be provided with updates as the application goes through the process of  saving the new record to the retrenched candidates sheet, calculating the number of days within the pool, and updating the data within the redeployment pool.
+ The user will be informed that the application is calculating the retrenchment package.This is done by fetching the salary, the Tenure - years and months values from the redeployment pool worksheet. The following calculation is then performed. Tenure-years * Monthly Salary + (Tenure-months / 12 * Monthly Salary). They will be provided with updates as the application goes through the process of  saving the new record to the retrenched employees sheet, calculating the number of days within the pool, and updating the data within the redeployment pool.
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/32.retrench-employee-update-redeployment-pool.PNG" 
      alt="retrenched employee sheet" 
@@ -806,10 +806,28 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
 	    
-5. The  validation to ensure that the employee number is uniqus runs correctly and displays as error message: PASS
+5. The  validation to ensure that the employee number is unique runs correctly and displays as error message: PASS
+
+<img src="" 
+     alt="employee number unique" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
 
 
- The employee number is captured by the user as a six digit unique number. The validations in place will ensure that the number is six digits long and only consists of numeric characters. It will also compare the number to the existing employee numbers within the google sheets database to ensure it is a unique value. The employee number is left as a string and added to google sheets this way as it is better to use a string to look up other data than an integer.
+ 6.The employee number is added a s a string to the sheet: PASS
+ 
+ <img src="" 
+     alt="employee number string" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+ 
+ 7. The request for the first name is asked next. It displays correctly, with no errors or spelling mistakes:PASS
  
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/05.first-name.PNG" 
      alt="Add Employee - Name" 
@@ -819,18 +837,79 @@ The following features could potentially be implemented in future releases:
             margin-right:auto;
             "> 
             
-The first name field is utilised to capture the first name of the employee. The data cannot be numeric. It does allow special characters as often names contain a dash -, a space, or pronunciation emphasis characters. When the first name is captured, the first letter of the name will be capitalised by the application and it will be saved as a string.
+8. The data cannot be numeric. An appropriate error message will display: PASS
 
- 
-   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/06.surname.PNG" 
-     alt="Add Employee - Surname" 
+   <img src="" 
+     alt="Add Employee - Name numeric" 
      style="display:block; 
             float:none; 
             margin-left:auto; 
             margin-right:auto;
             "> 
+
+9. It does allow special characters as often names contain a dash -, a space, or pronunciation emphasis characters: PASS
+
+   <img src="" 
+     alt="Add Employee - name characters" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+10. When the first name is captured, the first letter of the name will be capitalised by the application and it will be saved as a string: PASS
+
+   <img src="" 
+     alt="Capitalised and string" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
             
-The surname field is utilised to capture the surname of the employee. The same function to validate the first name is used to validate the surname, the first letter of the surname will be capitalised by the application and it will be saved as a string.
+ 11. The request for the surname name is asked next. It displays correctly, with no errors or spelling mistakes:PASS
+ 
+      <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/06.surname.PNG" 
+     alt="Add Employee - Surname" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">  
+
+            
+12. The data cannot be numeric. An appropriate error message will display: PASS
+
+   <img src="" 
+     alt="Add Employee - Surname numeric" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+13. It does allow special characters as often names contain a dash -, a space, or pronunciation emphasis characters: PASS
+
+   <img src="" 
+     alt="Add Employee - Surname characters" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+14. When the surname is captured, the first letter of the name will be capitalised by the application and it will be saved as a string: PASS
+
+   <img src="" 
+     alt="Capitalised and string" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+	    
+15. The add employee function will now request the user to capture the age of the employee. This displays correctly with no errors or spelling mistakes and user can capture their input: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/07.age.PNG" 
      alt="Add Employee - Age" 
@@ -840,8 +919,47 @@ The surname field is utilised to capture the surname of the employee. The same f
             margin-right:auto;
             "> 
             
-The age field is utilised to capture the age of the employee. The user is provided with an age range of 18 - 75 and they need to enter an age within this range. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur. The age field is converted to an integer and saved.
+16. The user is provided with an age range of 18 - 75 and they need to enter an age within this range. If they capture a value less than the minimum age it will fail and provide an error message: PASS
 
+   <img src="" 
+     alt="Add Employee - Age younger" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+	    
+17. If they capture a value greater than the maximum age it will fail and provide an error message: PASS
+
+   <img src="" 
+     alt="Add Employee - Age older" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+	    
+18. If they capture a non-numeric value it will fail and provide an error message: PASS
+
+   <img src="" 
+     alt="Add Employee - Age non-numeric" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+	    
+19. The age field is converted to an integer and saved correctly to the sheet: PASS
+
+   <img src="" 
+     alt="Add Employee - Age saved" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+	    
+20. The user is provided with the option to select the gender of the employee. It displays correctly, without errors or spelling mistakes: PASS
  
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/08.gender.PNG" 
      alt="Add Employee - Gender" 
@@ -851,9 +969,19 @@ The age field is utilised to capture the age of the employee. The user is provid
             margin-right:auto;
             "> 
             
-InquirerPy is utilised once again to capture the gender of the employee. The user is provided with a list of values and they need to select one of the provided options. Validations are not required as the data is already provided for the user to choose from. The gender field is saved as a string.
+21. Validations are not required as the data is already provided for the user to choose from. The user can select an option and proceed: PASS
 
+23.  The gender field is saved as a string to the sheet: PASS
+ 
+   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/08.gender.PNG" 
+     alt="Add Employee - Gender - string" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
 
+24. The Department field is utilised to capture the business department of the employee. It displays correctly, without errors or spelling mistakes: PASS
 
  
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/09.department.PNG" 
@@ -863,12 +991,21 @@ InquirerPy is utilised once again to capture the gender of the employee. The use
             margin-left:auto; 
             margin-right:auto;
             "> 
-            
-The Department field is utilised to capture the business department of the employee. The same function used to validate text fields is utilised again here, the first letter of the department will be capitalised by the application and it will be saved as a string.
+           
+25. The same function used to validate the text fields - first name and surname is utilised again here, a numeric value cannot be captured: PASS
 
+26. the first letter of the department will be capitalised by the application and it will be saved as a string: PASS
 
+   <img src="" 
+     alt="Add Employee - Department as string" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
 
- 
+27. The Position field is utilised to capture the current position filled by the employee. It displays correctly, with no errors or spelling mistakes: PASS
+
   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/10.position.PNG" 
      alt="Add Employee - Position" 
      style="display:block; 
@@ -877,9 +1014,19 @@ The Department field is utilised to capture the business department of the emplo
             margin-right:auto;
             "> 
             
-The Position field is utilised to capture the current position filled by the employee. The same function used to validate text fields is utilised again here, the first letter of the position will be capitalised by the application and it will be saved as a string.
+28. The same function used to validate text fields is utilised again here, a numeric value won't be accepted: PASS
 
+29. the first letter of the position will be capitalised by the application and it will be saved as a string: PASS
 
+  <img src="" 
+     alt="Add Employee - Position-string" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+30. The salary field is utilised to capture the current salary of the employee. It displays correctly, without errors or spelling mistakes: PASS
  
   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/11.salary.PNG" 
      alt="Add Employee - Salary" 
@@ -889,9 +1036,47 @@ The Position field is utilised to capture the current position filled by the emp
             margin-right:auto;
             "> 
             
-The salary field is utilised to capture the current salary of the employee. The user is provided with a salary range of 100 - 100 000 and they need to enter a salary within this range. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur. The age field is converted to an integer and saved.
+ 31.The user is provided with a salary range of 100 - 100 000 and they need to enter a salary within this range. If the salary is too low it  will display an error: PASS
+ 
+   <img src="" 
+     alt="Add Employee - Salary low" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+	    
+ 32.If the salary is too high it  will display an error: PASS
+ 
+   <img src="" 
+     alt="Add Employee - Salary high" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+ 
+33. The validation function will ensure that the data is numeric, the below example, a space has been added, if non-numeric it will fail: PASS
 
+   <img src="" 
+     alt="Add Employee - Salary non-numeric" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+ 
+34. The salary field is converted to an integer and saved: PASS
 
+   <img src="" 
+     alt="Add Employee - Salary integer saved" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+35. The years of service field is utilised to capture the number of years of service of the employee. It displays correctly without errors or spelling errors: PASS
  
   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/12.tenure-years.PNG" 
      alt="Add Employee - Tenure - years" 
@@ -901,7 +1086,29 @@ The salary field is utilised to capture the current salary of the employee. The 
             margin-right:auto;
             "> 
             
-The years of service field is utilised to capture the number of years of service of the employee. The user is provided with a  range of 1 - 50 and they need to enter a number within this range. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur. The years of service field is converted to an integer and saved. This value is later utilised to calculate the redeployment package. It remains as a fixed value and will not include the additional time spent in the redeployment pool.
+36. The user is provided with a  range of 1 - 50 and they need to enter a number within this range. If the number is too low it will fail: PASS
+
+  <img src="" 
+     alt="Add Employee - Tenure - years too low" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+38.  The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur such as if it is too high: PASS
+
+  <img src="" 
+     alt="Add Employee - Tenure - years too high" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+39.  The years of service field is converted to an integer and saved: PASS
+
+40.  The months of service field is utilised to capture the number of months of service of the employee. It displays correctly, without errors or spelling mistakes: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/13.tenure-months.PNG" 
      alt="Add Employee - Tenure - months" 
@@ -911,7 +1118,30 @@ The years of service field is utilised to capture the number of years of service
             margin-right:auto;
             "> 
             
-The months of service field is utilised to capture the number of months of service of the employee. The user is provided with a  range of 1 - 11 and they need to enter a number within this range. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occur. The months of service field is converted to an integer and saved. This value is later utilised to calculate the redeployment package. It remains as a fixed value and will not include the additional time spent in the redeployment pool.
+41.The user is provided with a  range of 1 - 11 and they need to enter a number within this range. If the number is too low it will fail: PASS
+
+   <img src="" 
+     alt="Add Employee - Tenure - months low" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+
+
+42. The validation function will ensure that the data is numeric and falls within the given range, otherwise a value error will occursuch as if it is too high: PASS
+
+   <img src="" 
+     alt="Add Employee - Tenure - months high" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+	    
+44.  The months of service field is converted to an integer and saved: PASS
+
+45. The start date / entry date field is utilised to capture the start date that the employee is added to the redeployment pool / begins the redeployment process. It displays correctly with no errors or spelling mistakes: PASS 
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/14.start-date.PNG" 
      alt="Add Employee - Start Date" 
@@ -921,17 +1151,37 @@ The months of service field is utilised to capture the number of months of servi
             margin-right:auto;
             "> 
             
-The start date / entry date field is utilised to capture the start date that the employee is added to the redeployment pool / begins the redeployment process. The date is validated to ensure it is captured in the format dd/mm/yyyy. An additional validation is in place to ensure that the date is less than today's date. This is to ensure that the calculation of number of days in the pool which happens when an employee is placed or retrenched will not error, as the exit date from the pool is captured as the current date, so the start date needs to be smaller than this date. A value error will occur if the date is captured incorrectly.
+ 46. The date is validated to ensure it is captured in the format dd/mm/yyyy: PASS
 
-   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/15.update-messages.PNG" 
-     alt="Add Employee - Update Message" 
+   <img src="" 
+     alt="Add Employee - Start Date incorrect" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            "> 
+ 
+ 47. An additional validation is in place to ensure that the date is less than today's date: PASS
+ 
+   <img src="" 
+     alt="Add Employee - Start Date greater than today" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+48. The date is saved correctly to the sheet: PASS
+
+   <img src="" 
+     alt="Add Employee - Start Dat saved correctly" 
      style="display:block; 
             float:none; 
             margin-left:auto; 
             margin-right:auto;
             ">
 
-Once all of the fields are captured, the user will be notified that the application is busy updating the redeployment pool worksheet with the record. The user will be informed when this has been successfully saved and they will be returned to the main menu.
+49. The employee record is saved as a row to the end of the correct worksheet - redeployment_pool. All of the data matches up to the correct column: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/16.data-added-to-worksheet.PNG" 
      alt="Add Employee - added to sheet" 
@@ -940,23 +1190,32 @@ Once all of the fields are captured, the user will be notified that the applicat
             margin-left:auto; 
             margin-right:auto;
             ">
-            
-All of the data will be added in the correct order to a list and the application will call the function to add the new employee record as a row to the worksheet redeployment_pool  within the google sheet, thereby successfully updating the database.
+	    
+50. The user will be returned to the main menu: PASS
 
 ## Update Employee
+
+1. When the user selects the action to update an employee, the select employee menu with the active employees is returned. It displays correctly, without errors or spelling mistakes. It contains the employee number, the employee name and the empoyee surname: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/17.update-employee.PNG" 
      alt="update employee" 
      style="display:block; 
             float:none; 
             margin-left:auto; 
-            margin-right:auto;
-            "> 
+            margin-right:auto;"> 
 
-The user can select the option update employee details, this will call a list containing the active employees within the redeployment pool. Once an employee has been placed or retrenched, their data can no longer be updated, as the redeployment process has been completed for them.
+2. It does not display the placed or retrenched employees: PASS
 
+3. The user can then select the relevant employee to update: PASS
 
-The user will be presented with the list of active employees which contains the employee number, the first name and the surname. They can select the relevant employee to update. The employee number will be saved as a reference to select the correct record within google sheets to update.
+   <img src="" 
+     alt="select employee" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;"> 
+
+4. Once an employee has been selected, the user will be presented with a list of options to choose from. It displays correctly, without errors or spelling mistakes: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/18.update-options.PNG" 
      alt="update options" 
@@ -967,7 +1226,11 @@ The user will be presented with the list of active employees which contains the 
             "> 
 	    
 	    
-Once an employee has been selected, the user will be presented with a list of options to choose from. These are the various data fields within the redeployment pool. Each option will call the relevant function, as per the functions used within the add employee action, to update and validate the new value for the field.
+5. The options are the various data fields within the redeployment pool. Each option calls the relevant function, as per the functions used within the add employee action, to update and validate the new value for the field: PASS
+6. Once the user has entered their update, the application will save the data change to the sheet and let the user know once completed: PASS
+7. The user will be presented with the option to select whether they would like to return to the update options menu to update another record: PASS
+8. If they select yes, the update action will run again: PASS
+9. If they select no, they will be returned to the main menu: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/19.update-capture.PNG" 
      alt="update captured" 
@@ -976,31 +1239,21 @@ Once an employee has been selected, the user will be presented with a list of op
             margin-left:auto; 
             margin-right:auto;
             "> 
-	    
-	    
-The user will utilise the input field to capture the new value.
 
-   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/20.update-complete-return-to-menu.PNG" 
-     alt="update complete return to menu" 
-     style="display:block; 
-            float:none; 
-            margin-left:auto; 
-            margin-right:auto;
-            ">
-            
-Once the user has entered their update, the application will save the data change to the sheet and let the user know once completed. The user will be presented with the option to select whether they would like to return to the update options menu to update another record. If they select yes, the update action will run again. If they select no, they will be returned to the main menu.
+             
+10. Only the cell that has been updated by the user will be changed within the google sheet. All other values will remain the same: PASS
 
-   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/21.update-saved.PNG" 
+<img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/21.update-saved.PNG" 
      alt="updated cell" 
      style="display:block; 
             float:none; 
             margin-left:auto; 
             margin-right:auto;
              ">
-             
-Only the cell that has been updated by the user will be changed within the google sheet. All other values will remain the same.
 
 ## Place Employee
+
+1. When the user selects the action to place an employee, the select employee menu with the active employees is returned. It displays correctly, without errors or spelling mistakes. It contains the employee number, the employee name and the empoyee surname: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/22.place-employee-select.PNG" 
      alt="place employee" 
@@ -1009,8 +1262,18 @@ Only the cell that has been updated by the user will be changed within the googl
             margin-left:auto; 
             margin-right:auto;
             "> 
+2. It does not display the placed or retrenched employees: PASS
 
-When the user selects the action to place an employee, the select employee menu with the active employees is returned. The user can then select the relevant employee to place.
+3. The user can then select the relevant employee to place: PASS
+
+   <img src="" 
+     alt="select employee" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;"> 
+	    
+4. The user is asked if there has been a change in the employee's salary. They can select if it has been decreased, remained the same or increased. The menu displays correctly, without errors or spelling mistakes: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/23.change-in-salary.PNG" 
      alt="change in salary" 
@@ -1021,7 +1284,8 @@ When the user selects the action to place an employee, the select employee menu 
             "> 
 	    
 	    
-The user is asked if there has been a change in the employee's salary. They can select if it has been decreased, remained the same or increased. The users selection is saved.
+5. The users selection is saved to be referenced again: PASS
+6. The user is requested to capture the new department of the employee. This will be the department that the employee has been placed within and calls the same function to add a department for a new employee: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/24.new-department.PNG" 
      alt="new department" 
@@ -1032,7 +1296,7 @@ The user is asked if there has been a change in the employee's salary. They can 
             ">
 	    
 	    
-The user is requested to capture the new department of the employee. This will be the department that the employee has been placed within.
+7. The user is requested to capture the new position of the employee. This will be the position that the employee has been recruited into and calls the same function to add a position for a new employee: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/25.new-position.PNG" 
      alt="new position" 
@@ -1043,20 +1307,41 @@ The user is requested to capture the new department of the employee. This will b
             ">
 	    
 	    
-The user is requested to capture the new position of the employee. This will be the position that the employee has been recruited into.
+8.The user is requested to capture the new salary of the employee. If the salary has decreased they will need to capture a salary that is less than the current salary: PASS
 
-
-   <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/26.new-salary-and-difference.PNG" 
-     alt="new salary" 
+   <img src="" 
+     alt="salary decrease" 
      style="display:block; 
             float:none; 
             margin-left:auto; 
             margin-right:auto;
             ">
 	    
-	    
-The user is requested to capture the new salary of the employee. If the salary has decreased they will need to capture a salary that is less than the current salary. If the salary has been increased, they will need to capture a salary that is greater than the current salary. If the salary has remained the same, they will not have to recapture it. The difference will be calculated as 0.
+9. If the salary has been increased, they will need to capture a salary that is greater than the current salary: PASS
 
+   <img src="" 
+     alt="salary increase" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+11. If the salary has remained the same, they will not have to recapture it. The difference will be calculated as 0: PASS
+
+
+   <img src="" 
+     alt="salary the same" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+12. The difference between the salaries is calculated correctly: PASS
+	    
+13. The user will be thanked for capturing the placement. They will be provided with updates as the application goes through the process of  saving the new record to the placed employees sheet: PASS
+14. The days within the pool are calculated correctly: PASS
+15. The status is captured add Placed and the record is updated within the redeployment pool sheet: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/27.placed-messages.PNG" 
      alt="placed messages" 
@@ -1066,8 +1351,7 @@ The user is requested to capture the new salary of the employee. If the salary h
             margin-right:auto;
             ">
 	    
-	    
-The user will be thanked for capturing the placement. They will be provided with updates as the application goes through the process of  saving the new record to the placed candidates sheet, calculating the number of days within the pool, and updating the data within the redeployment pool.
+16. The employee record will be added as a row to the placed employee worksheet within google sheets. The data will align with the columns in the sheet: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/28.placed-employee.PNG" 
      alt="placed employee sheet" 
@@ -1077,7 +1361,7 @@ The user will be thanked for capturing the placement. They will be provided with
             margin-right:auto;
             ">
             
-The employee record will be added to the placed employee worksheet within google sheets.
+17. The employee record within the redeployment pool worksheet will have the exit date added as the current date, the days within the pool will be calculated and added and the status will be updated as Placed: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/29.redeployment-pool-updated.PNG" 
      alt="redeployment pool employee placed update" 
@@ -1086,13 +1370,12 @@ The employee record will be added to the placed employee worksheet within google
             margin-left:auto; 
             margin-right:auto;
             ">
-	    
-	    
-The employee record within the redeployment pool worksheet will have the exit date added as the current date, the days within the pool will be calculated and added and the status will be updated as Placed.
-
-The user will be returned to the main menu.
+	       
+18. The user will be returned to the main menu: PASS
 
 ## Retrench Employee
+
+1. When a user selects to retrench an employee, the employee menu will display for the user to select an employee from. This will display correctly, without errors or spelling mistakes: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/30.retrench-employee.PNG" 
      alt="retrench employee" 
@@ -1101,9 +1384,22 @@ The user will be returned to the main menu.
             margin-left:auto; 
             margin-right:auto;
             ">
-	    
-	    
-When a user selects to retrench an employee, the employee menu will display for the user to select an employee from. Note that the employee Dale Jason, who was placed, no longer reflects on the menu as his status is no longer active.
+2. It does not display the placed or retrenched employees: PASS
+
+3. The user can then select the relevant employee to place: PASS
+
+   <img src="" 
+     alt="select employee" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;"> 	    
+
+
+ 4. The user will be informed that the application is calculating the retrenchment package.This is done by fetching the salary, the Tenure - years and months values from the redeployment pool worksheet. The following calculation is then performed. Tenure-years * Monthly Salary + (Tenure-months / 12 * Monthly Salary). This is calculated correctly: PASS
+
+ 5.  They will be provided with updates as the application goes through the process of  saving the new record to the retrenched employees sheet, calculating the number of days within the pool, and updating the data within the redeployment pool: PASS
+
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/31.retrench-employee-update-messages.PNG" 
      alt="retrench employee - updates" 
@@ -1113,7 +1409,7 @@ When a user selects to retrench an employee, the employee menu will display for 
             margin-right:auto;
             ">
 
- The user will be informed that the application is calculating the retrenchment package.This is done by fetching the salary, the Tenure - years and months values from the redeployment pool worksheet. The following calculation is then performed. Tenure-years * Monthly Salary + (Tenure-months / 12 * Monthly Salary). They will be provided with updates as the application goes through the process of  saving the new record to the retrenched candidates sheet, calculating the number of days within the pool, and updating the data within the redeployment pool.
+6. The employee record will be added to the retrenched employee worksheet within google sheets as a new row. All data will align with the columns: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/32.retrench-employee-update-redeployment-pool.PNG" 
      alt="retrenched employee sheet" 
@@ -1123,7 +1419,7 @@ When a user selects to retrench an employee, the employee menu will display for 
             margin-right:auto;
             ">
             
-The employee record will be added to the retrenched employee worksheet within google sheets.
+7. The employee record within the redeployment pool worksheet will have the exit date added as the current date, the days within the pool will be calculated and added and the status will be updated as Retrenched: PASS
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/33.retrenched-employee.PNG" 
      alt="redeployment pool employee retrenched update" 
@@ -1132,13 +1428,12 @@ The employee record will be added to the retrenched employee worksheet within go
             margin-left:auto; 
             margin-right:auto;
             ">
-	    
-	    
-The employee record within the redeployment pool worksheet will have the exit date added as the current date, the days within the pool will be calculated and added and the status will be updated as Retrenched.
-
-The user will be returned to the main menu.
+	        
+8. The user will be returned to the main menu: PASS
 
  ## Data Tables
+ 
+1. When the user selects the option Data Tables they are taken to the data table menu containing the various tables that can be displayed. This displays correctly, without errors or spelling mistakes: PASS
  
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/34.data-tables-menu.PNG" 
      alt="data tables menu" 
@@ -1148,12 +1443,7 @@ The user will be returned to the main menu.
             margin-right:auto;
             ">
 	    
-	    
-When the user selects the option Data Tables they are taken to the above data table menu containing the various tables that can be displayed. It is very useful for the  user to be able to call the various tables to view the data, as it allows them to check updates to the redeployment pool, check calculations and have the data at hand, as per live capture, if questioned.
-
-Each option displays the relevant table as follows:
-
-Redeployment Pool Summary
+2. The Redeployment Pool Summary returns the following fields: Employee Number, Name, Surname, Entry Date, Status. The data is sorted by Status: PASS
 
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/35.redeployment-pool-summary.PNG" 
@@ -1165,7 +1455,7 @@ Redeployment Pool Summary
             ">
 	    
 	    
- Personal Details Summary
+3.  Personal Details Summary returns the following fields: Employee Number, Name, Surname, Age, Gender. The data is sorted by gender: PASS
  
  
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/36.personal-details-summary.PNG" 
@@ -1177,7 +1467,7 @@ Redeployment Pool Summary
             ">
 	    
 	    
-Department and Position
+4. Department and Position returns the following fields: Employee Number, Name,  Surname, Department, Position. The data is sorted by department: PASS
 
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/37.department-and-position.PNG" 
@@ -1189,7 +1479,7 @@ Department and Position
             ">
 	    
 	    
- Placed employees
+5. Placed employees returns the following fields: Employee Number, Name,  Surname, New Department, New Position.  The data is sorted by department: PASS
  
  
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/38.placed-employees.PNG" 
@@ -1200,7 +1490,7 @@ Department and Position
             margin-right:auto;
             ">
             
-Salary Comparison
+6. Salary Comparison returns the following fields: Employee Number, Name,  Surname, Old Monthly Salary, New Monthly Salary, Difference, Salary Status. The data is sorted by Salary Status: PASS
 
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/39.salary-comparison.PNG" 
@@ -1211,7 +1501,7 @@ Salary Comparison
             margin-right:auto;
             ">
             
-Days within Pool
+7. Days within Pool returns the following fields:  Employee Number, Name,  Surname, Entry Date, Exit Date, Days within Pool, Status. The data uis sorted by Days within Pool: PASS
 
 
    <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/40.days-within-pool.PNG" 
@@ -1222,7 +1512,7 @@ Days within Pool
             margin-right:auto;
             ">
             
-Salary and Tenure
+8. Salary and Tenure returns the following fields: Employee Number, Name,  Surname, Monthly Salary, Tenure -years, Tenure -months. The data is sorted by salary: PASS
 
 
 <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/41.salaries-and-tenure.PNG" 
@@ -1233,7 +1523,7 @@ Salary and Tenure
             margin-right:auto;
             ">
             
-Retrenched Employees
+9. Retrenched Employees returns the following fields: Employee Number, Name,  Surname, Retrenchment Package. The data is sorted by Retrenchment Package: PASS
 
 
 <img src="https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/features/42.retrenched-employees.PNG" 
@@ -1243,17 +1533,74 @@ Retrenched Employees
             margin-left:auto; 
             margin-right:auto;
             ">
-
+	    
+10. Return to main menu returns the user to the main menu: PASS
 
 ### Bugs and Issues
 
+1. An issue was experienced with the start date field. If I converted the value to a date within the function, it could not be returned to the sheet, a json serializable error would occur:
+
+<img src="" 
+     alt="json serializable error" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+	    
+2. If I utilised python code to serialize the date, it would be returned to google sheets in a long and complicated format. I required that the date be added precisely as it is utilised to calculate the days in pool figure.
+3. If I added the date to a list with the rest of the values for a new employee, it would be added as a string and contain ' in front.
+4. However if I added the string date to the redeployment_pool sheet as an individual cell update, the value would be added without the character ' and sheets would format it accordingly.
+5. I could then easily fetch the value and prepare it in python for the days in pool calculation.
 
 ### User Stories Testing
 
+1. The user is a person who works within the HR job family who is required to maintain the redeployment pool: PASS - the application utilises common practice phrases, naming conventions and a process that would be familiar to an HR professional.
+2. The user will need to select between various actions in order to proceed: PASS - the main menu provides the user with the various actions to select between.
+3. The first action should be to add a new employee to the redeployment pool: PASS - this is the first action available on the list.
+4. The user should be required to input or select the various data required to add an employee: PASS - the action calls all the relevant functions to update the required data fields.
+5. All data captured should pass the specific validations in place to ensure accuracy: PASS - all of the data fields have validations in place, unless the value is selected from a set list of values.
+6. Once all fields are captured, the data should be consolidated into one list and saved to the redeployment pool database found in google sheets: PASS - the data is consolidated and saved as a row to the worksheet.
+7. The second action available should be to update the data of an employee within the redeployment pool: PASS - this is the second action available on the main menu.
+8. The user should be able to select the employee through the employee number as the unique identifier: PASS - the employee number is provided as the main identifier, the user experience is further enhanced as the first name and surname is also provided.
+9. If the employee is no longer active within the redeployment pool, the user should not be able to select them: PASS - placed or retrenched employees do not appear on the employee selection list.
+10. The user should be able to select which field they wish to update: PASS - the user is presented with all data fields as options within a list which they can select from.
+11. Once the field is selected, the necessary function to update the data should run: PASS - all of the fields call the correct function to update the value.
+12. The user should be given the option to update another field or to return to the main menu: PASS - once the update has been saved, the user is asked whether they would like to perform another update or to return to the main menu.
+13. The next action the user should be able to perform is to place an employee: PASS - placing an employee is the third option available within the main menu.
+14. The place action should allow the user to place an employee within a new position in a new department: PASS -the function includes the selection of a new department and a new position for the employee.
+15. The user should be able to select whether the employee received a change in salary or not: PASS - the user can select if there was a decrease, an increase or if the salary remained the same.
+16. The difference between old salary and new salary should be calculated: PASS - this is calculated and added as a new field called Difference.
+17. All data captured should be consolidated and added to the placed employees sheet within the workbook: PASS - the data is added as a new row to the worksheet.
+18. The relevant fields within the redeployment pool should be updated with the new data: PASS - only the affected fields are updated within the redeployment pool sheet.
+19. The user should be able to action a retrenchment: PASS - this is the fourth option within the main menu.
+20. The user should be able to select an employee from within the redeployment pool to retrench: PASS - the first function called is to select an employee.
+21. This employee cannot have the status placed or retrenched already: PASS - the employee list only contains active employees.
+22. Once the employee is selected, the retrenchment package should be calculated utilising information from within the redeployment pool: PASS - the salary and tenure information is fetched from the redeployment pool sheet and utilised to calculate the package.
+23. The data should be consolidated and saved to the retrenched employees sheet within the workbook: PASS - the data is consolidated and added as a new row to the retrenched employees worksheet.
+24. The user should be able to view the data available in google sheets via the command-line application: PASS - various data tables are available to the user to view the data.
 
 ### Code Validation
 
+The run.py file passed through pep-8 online successfully:
 
+<img src="" 
+     alt="json serializable error" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
+
+Pycodestyle ran within the console returned no errors:
+
+<img src="" 
+     alt="pycodestyle validation" 
+     style="display:block; 
+            float:none; 
+            margin-left:auto; 
+            margin-right:auto;
+            ">
 
 ### Deployment Testing
 
@@ -1495,7 +1842,7 @@ The following were used for any general queries or guidance required:
 4. Function update_sheet(data, worksheet)
    This function was created based on the update_worksheet() function created in the Code Institute Love Sandwiches project. It has been adjusted to align with this application's requirements.
    
-5. Function add_candidate()
+5. Function add_employee()
    The following article was referenced to return a cell's address:
    https://github.com/burnash/gspread/issues/41
    
@@ -1541,7 +1888,7 @@ The following were used for any general queries or guidance required:
      The following article was referenced to split the string:
      https://stackoverflow.com/questions/7844118/how-to-convert-comma-delimited-string-to-list-in-python
      
-  11. Function place_candidate()
+  11. Function place_employee()
       to access specific cell and return the value from the dataframe:
       https://pythonhow.com/accessing-dataframe-columns-rows-and-cells/
   
