@@ -81,8 +81,8 @@ def validate_number(value):
             raise ValueError(
                 f"{len(value)} digits"
             )
-        employees = retrieve_dataset("redeployment_pool",
-                                     [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
+        employees = retrieve_dataset_employee("redeployment_pool",
+                                              "Emp Number")
         if value in employees:
             raise ValueError(f"the duplicate employee number {value}")
     except ValueError as e:
@@ -347,12 +347,32 @@ def retrieve_dataset(worksheet, columns_list):
     headers = data.pop(0)
     df = pd.DataFrame(data, columns=headers)
     df = df.loc[df["Status"] != "Placed"]
-    df = df.loc[df["Status"] != "Retrenched"]
+    df = df.loc[df["Status"] != "Retren."]
     df = df.drop(df.columns[columns_list], axis=1)
     df["combined"] = df.values.tolist()
     employees = df["combined"].tolist()
     emp_list = list(map(" ".join, employees))
     return emp_list
+
+
+def retrieve_dataset_employee(worksheet, heading):
+    """
+    Utilises pandas to return the worksheet to python.
+    The employee list is utilised by the user to select
+    an employee.
+    Args:
+        worksheet - string name of worksheet, heading - to add employee
+        number only
+    Returns:
+        list of all employee numbers
+    """
+    wks = SHEET.worksheet(worksheet)
+    data = wks.get_all_values()
+    headers = data.pop(0)
+    df = pd.DataFrame(data, columns=headers)
+    identifier = df[heading]
+    employee_list = identifier.to_list()
+    return employee_list
 
 
 def retrieve_headers():
@@ -484,10 +504,10 @@ def update_field():
         job = get_input("position")
         position = "Position", f"{job}"
         new_value = position
-    elif field == "Monthly Salary":
+    elif field == "Salary":
         paid = get_number("salary", "salary",
                           "100 to 100 000", salary_range)
-        salary = "Monthly Salary", f"{paid}"
+        salary = "Salary", f"{paid}"
         new_value = salary
     elif field == "Tenure -years":
         service_years = get_number("years of service",
@@ -688,7 +708,7 @@ def days_in_pool(worksheet, emp_value):
     days_in_pool = d1 - d0
     days = str(days_in_pool)
     days_no = (days[0] + days[1])
-    cell_4 = sheet.find("Days within Pool")
+    cell_4 = sheet.find("Days")
     col_3_no = "%s" % (cell_4.col)
     sheet.update_cell(row_no, col_3_no, int(days_no))
     print(f"{worksheet} cell: row{row_no}, col{col_3_no} successfully"
@@ -714,7 +734,7 @@ def place_employee():
     data = sheet.get_all_values()
     headers = data.pop(0)
     df = pd.DataFrame(data, columns=headers)
-    df2 = df.set_index("Employee Number", drop=False)
+    df2 = df.set_index("Emp Number", drop=False)
     name_emp = df2.loc[emp_value, "Name"]
     surname = df2.loc[emp_value, "Surname"]
     print("Has there been a change in monthly salary?\n")
@@ -735,7 +755,7 @@ def place_employee():
     department = department_position[0]
     position = department_position[1]
     current_salary = int(fetch_current_salary("redeployment_pool", emp_value,
-                                              "Monthly Salary"))
+                                              "Salary"))
     if salary_update == "Decrease":
         salary_range = range(100, (current_salary - 1), 1)
         range_value = f"100 to {current_salary - 1}."
@@ -746,7 +766,7 @@ def place_employee():
         print(f"The new salary has been captured as {paid}.")
         print("Calculating difference in salary")
         difference = (paid - current_salary)
-        status = ("Decreased")
+        status = ("Decr.")
     elif salary_update == "Remains the Same":
         print(f"The current employee salary is: {current_salary}."
               " This will remain the same.")
@@ -763,7 +783,7 @@ def place_employee():
         print(f"The new salary has been captured as {paid}.")
         print("Calculating difference in salary")
         difference = (paid - current_salary)
-        status = ("Increased")
+        status = ("Incr.")
     print("Thank you for capturing the placement.")
     placed_employee = [emp_value, name_emp, surname, department, position,
                        current_salary, paid, difference, status]
@@ -814,7 +834,7 @@ def retrench_employee():
     data = sheet.get_all_values()
     headers = data.pop(0)
     df = pd.DataFrame(data, columns=headers)
-    df2 = df.set_index("Employee Number", drop=False)
+    df2 = df.set_index("Emp Number", drop=False)
     name = df2.loc[emp_value, "Name"]
     surname = df2.loc[emp_value, "Surname"]
     print("Calculating retrenchment package...\n")
@@ -822,7 +842,7 @@ def retrench_employee():
     sheet = SHEET.worksheet("redeployment_pool")
     cell = sheet.find(emp_value)
     row_no = "%s" % (cell.row)
-    cell_2 = sheet.find("Monthly Salary")
+    cell_2 = sheet.find("Salary")
     col_no = "%s" % (cell_2.col)
     salary_current = (sheet.cell(row_no, col_no).value)
     print("Fetching Tenure -years...\n")
@@ -841,7 +861,7 @@ def retrench_employee():
     retrenched_employee = [emp_value, name, surname, package]
     update_sheet(retrenched_employee, "retrenched_employees")
     update_exit_date_status("retrenched_employees",
-                            "redeployment_pool", emp_value, "Retrenched")
+                            "redeployment_pool", emp_value, "Retren.")
     main()
 
 
@@ -941,7 +961,7 @@ def placed_employees_report():
     print("The below table displays the employees")
     print("who have been placed in new positions.\n")
 
-    display_redeployment_pool("placed_employees", "New Department",
+    display_redeployment_pool("placed_employees", "New Dep",
                               [5, 6, 7, 8])
     print("  \n")
     red_pool_tables()
@@ -971,7 +991,7 @@ def salary_comparison_report():
     print("placed employees salary comparisons.")
     print("It is sorted by Salary Status.\n")
 
-    display_redeployment_pool("placed_employees", "Salary Status",
+    display_redeployment_pool("placed_employees", "Status",
                               [3, 4])
     print("  \n")
     red_pool_tables()
@@ -986,7 +1006,7 @@ def days_within_pool_report():
     print("number of days each employee")
     print("was in the redeployment pool.\n")
 
-    display_remove_rows("redeployment_pool", "Days within Pool",
+    display_remove_rows("redeployment_pool", "Days",
                         [3, 4, 5, 6, 7, 8, 9])
     print("  \n")
     red_pool_tables()
@@ -1002,7 +1022,7 @@ def salary_and_tenure_report():
     print("These figures are used in the")
     print("retrenchment package calculation.\n")
 
-    display_redeployment_pool("redeployment_pool", "Monthly Salary",
+    display_redeployment_pool("redeployment_pool", "Salary",
                               [3, 4, 5, 6, 10, 11, 12, 13])
     print("  \n")
     red_pool_tables()
@@ -1018,7 +1038,7 @@ def retrenched_report():
     print("These retrenchment package")
     print("calculation is (Salary * Tenure(years)) + (Salary * Months/12).\n")
 
-    display_redeployment_pool("retrenched_employees", "Retrenchment Package",
+    display_redeployment_pool("retrenched_employees", "Package",
                               [])
     print("  \n")
     red_pool_tables()
