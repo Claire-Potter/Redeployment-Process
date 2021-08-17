@@ -1604,14 +1604,51 @@ Pycodestyle ran within the console returned no errors:
 
 ### Deployment Testing
 
+An issue was experienced when accessing the deployed site on Heroku. I was able to deploy the site successfully, however,
+when I tried to run the site, I received an error that the readchar programme was not working. When I looked into this further
+I saw that this was part of the inquirer library. The application was dependent on the inquirer library as it is used multiple
+times to create menus and options lists. When researching, I discovered that inquirer only worked on python 3.8 downwards. I tried to creat a runscript to specify that Heroku uses python 3.8.11, as this is what I was using on git. This did not correct the error. I then went through the process of updating from the inquirer library to the InquirerPy library and the latest version of readchar as this is aligned to python 3.9. I also installed node modules via npm to try to cater for the missing functionality. The updates meant that the deployed application no longer generated an error message, however it was still not working. It presented me with a static screen displaying the main menu, but no options could be selected.
 
+I had logged the issue with the tutor team, who were in the process of getting advice from the assessment team and the development team. The development team very kindly created a brand new template for me to utilise to create a new repository from. The changes that they made meant that the InquirerPy function could now be read by the command line interface. I created a new repository using the template and added my run.py and requirements.txt files to the new repository. I then deployed the new version to Heroku. The new application works well! I have included the link to the application from the new repository within this ReadMe, as this is the original repository, it contains the full commit history.
+
+The only additional changes I had to make once deployed, was to summarise the various headings within the worksheets on google sheets and make sure the new names were utilised throughout my code. Due to the width of the screen of the app, the Data Tables needed to be more compact to be able to display well. All other functionality was tested and passed.
+
+The changes made were as follows:
+
+1. Change from Employee Number to Emp Number:
+
+![emp number](https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/deployed-site-changes/00.emp-number.PNG)
+
+2. Change the Status Retrenched to Retren.
+
+![Retren.](https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/deployed-site-changes/01.redeployment-pool-report.PNG)
+
+3. Shorten the headings New Department and New Position to New Dep and New Pos
+
+![New Dep and Pos](https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/deployed-site-changes/03.placed-employees.PNG)
+
+4. Shorten Difference to Diff and change Salary Status to Status
+
+![Salary Status](https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/deployed-site-changes/04.salary-comparison.PNG)
+
+5. Shorten Days with Pool to Days
+
+![Days](https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/deployed-site-changes/05.days-within-pool.PNG)
+
+6. Shorten Monthly Salary to Salary
+
+![Salary](https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/deployed-site-changes/06.salary-and-tenure.PNG)
+
+7. Shorten Retrenchment Package to Package
+
+![Package](https://github.com/Claire-Potter/Redeployment-Process/blob/main/read-me-content/deployed-site-changes/07.retrenched-employees.PNG)
 
 
 # Deployment
 
 ## Development Interface
 
-This website was developed on Gitpod using the Code Institute Python student template with changes frequently committed to git then pushed onto GitHub from the Gitpod terminal.
+This website was developed on Gitpod using the Code Institute Python student template with changes frequently committed to git then pushed onto GitHub from the Gitpod terminal. The deployed site utilises the new version of the python template.
 
 The deployed version of the website is the master.
 
@@ -1927,6 +1964,8 @@ The mockup image in the ReadMe was created using the following site:
 # Acknowledgments
 
 A huge thank you to my mentor Brian Macharia. The guidance and advice that you have provided has been invaluable.
+
+Thank you so much to the Code Institute Tutoring Team as well as the Code Development Team who created a new Python Repository Template for me to utilise to deploy my site. I greatly appreciate your fantastic support.
 
 Thank you to Code Institute for providing such well-thought out and put together course material and for the constant guidance and advice provided through Slack.
 
